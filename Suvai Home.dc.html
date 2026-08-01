@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#1a5c2a"/><circle cx="100" cy="90" r="42" fill="#E87722"/><text x="100" y="98" font-size="34" fill="#fff" text-anchor="middle" font-family="sans-serif" font-weight="700">S</text><text x="100" y="160" font-size="18" fill="#FAF7F2" text-anchor="middle" font-family="sans-serif" font-weight="700">Suvai</text></svg></template>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Noto+Sans+Tamil:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body { background: #e9e4db; font-family: 'Manrope', 'Noto Sans Tamil', sans-serif; }
+    a { color: #1a5c2a; text-decoration: none; }
+    a:hover { color: #E87722; }
+    .ta { font-family: 'Noto Sans Tamil', sans-serif; }
+    .noscroll::-webkit-scrollbar { display: none; }
+    @keyframes pindrop { 0% { transform: translateY(-14px) scale(.6); opacity: 0; } 60% { transform: translateY(2px) scale(1.05); opacity: 1; } 100% { transform: translateY(0) scale(1); opacity: 1; } }
+    @keyframes pulsering { 0% { transform: scale(.5); opacity: .55; } 100% { transform: scale(2.4); opacity: 0; } }
+  </style>
+</helmet>
+
+<div style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 28px 16px; background: radial-gradient(circle at 50% 0%, #f3efe7, #ded7cb);">
+  <div style="position: relative; width: 393px; height: 852px; border-radius: 44px; background: #0f2417; padding: 11px; box-shadow: 0 40px 90px -30px rgba(20,50,30,.55), 0 0 0 2px rgba(255,255,255,.04) inset;">
+    <div style="position: relative; width: 100%; height: 100%; border-radius: 34px; overflow: hidden; background: #FAF7F2;">
+
+      <!-- ===== MAP LAYER ===== -->
+      <div style="position: absolute; inset: 0; background: #eef1e8;">
+        <svg viewBox="0 0 393 852" width="393" height="852" style="display:block;" preserveAspectRatio="xMidYMid slice">
+          <rect x="0" y="0" width="393" height="852" fill="#eef2e6"></rect>
+          <!-- park blocks -->
+          <rect x="-20" y="120" width="150" height="150" rx="16" fill="#d6e5c4"></rect>
+          <rect x="250" y="60" width="180" height="130" rx="16" fill="#d6e5c4"></rect>
+          <rect x="270" y="420" width="160" height="150" rx="16" fill="#dbe7cb"></rect>
+          <rect x="-30" y="520" width="140" height="160" rx="16" fill="#dbe7cb"></rect>
+          <!-- water -->
+          <path d="M-20 300 C 80 330, 120 280, 200 320 C 280 360, 340 320, 420 350 L 420 430 C 340 400, 280 440, 200 400 C 120 360, 80 410, -20 380 Z" fill="#bcd6e0"></path>
+          <!-- roads -->
+          <g stroke="#f7f4ee" stroke-linecap="round">
+            <line x1="196" y1="-10" x2="196" y2="870" stroke-width="26"></line>
+            <line x1="-10" y1="240" x2="410" y2="240" stroke-width="22"></line>
+            <line x1="-10" y1="600" x2="410" y2="600" stroke-width="22"></line>
+            <line x1="90" y1="-10" x2="90" y2="870" stroke-width="14"></line>
+            <line x1="310" y1="-10" x2="310" y2="870" stroke-width="14"></line>
+            <line x1="-10" y1="450" x2="410" y2="450" stroke-width="12"></line>
+            <line x1="-10" y1="740" x2="410" y2="740" stroke-width="12"></line>
+          </g>
+          <g stroke="#ffffff" stroke-linecap="round" stroke-dasharray="1 16" opacity=".9">
+            <line x1="196" y1="-10" x2="196" y2="870" stroke-width="2.5"></line>
+            <line x1="-10" y1="240" x2="410" y2="240" stroke-width="2.5"></line>
+            <line x1="-10" y1="600" x2="410" y2="600" stroke-width="2.5"></line>
+          </g>
+        </svg>
+
+        <!-- your location -->
+        <div style="position: absolute; left: 196px; top: 372px; transform: translate(-50%,-50%);">
+          <div style="position:absolute; left:50%; top:50%; width:26px; height:26px; margin:-13px 0 0 -13px; border-radius:50%; background:#3b82c4; animation: pulsering 2.4s ease-out infinite;"></div>
+          <div style="position:relative; width:18px; height:18px; border-radius:50%; background:#3b82c4; border:3px solid #fff; box-shadow:0 2px 6px rgba(0,0,0,.25);"></div>
+        </div>
+
+        <!-- vendor pins -->
+        <sc-for list="{{ pins }}" as="p" hint-placeholder-count="6">
+          <div onClick="{{ p.onClick }}" style="{{ p.style }}">
+            <div style="{{ p.wrapStyle }}">
+              <svg width="{{ p.size }}" height="{{ p.size }}" viewBox="0 0 24 24" style="display:block; filter: drop-shadow(0 4px 5px rgba(120,50,0,.35));">
+                <path d="M12 2C7.6 2 4 5.5 4 9.8c0 5.4 6.8 11.4 7.1 11.7.5.4 1.3.4 1.8 0C13.2 21.2 20 15.2 20 9.8 20 5.5 16.4 2 12 2z" fill="{{ p.color }}" stroke="#fff" stroke-width="1.6"></path>
+                <circle cx="12" cy="9.6" r="3" fill="#fff"></circle>
+                <sc-if value="{{ p.certified }}" hint-placeholder-val="{{ false }}">
+                  <path d="M10.4 9.6l1.1 1.1 2-2.1" fill="none" stroke="{{ p.color }}" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"></path>
+                </sc-if>
+              </svg>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+
+      <!-- ===== TOP: status + search + chips ===== -->
+      <div style="position: absolute; top: 0; left: 0; right: 0; z-index: 5; padding: 0 16px; background: linear-gradient(#FAF7F2 62%, rgba(250,247,242,0));">
+        <div style="height: 20px; display:flex; align-items:center; justify-content:space-between; padding: 4px 6px 0; font-size:12px; font-weight:700; color:#1a5c2a;">
+          <span>9:41</span>
+          <span style="letter-spacing:2px;">••• ▪ ⬤</span>
+        </div>
+
+        <div style="display:flex; align-items:center; justify-content:space-between; padding: 10px 2px 8px;">
+          <div>
+            <div style="font-size:12px; font-weight:600; color:#E87722; display:flex; align-items:center; gap:4px;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="#E87722"><path d="M12 2C7.6 2 4 5.5 4 9.8c0 5.4 6.8 11.4 7.1 11.7.5.4 1.3.4 1.8 0C13.2 21.2 20 15.2 20 9.8 20 5.5 16.4 2 12 2z"></path></svg>
+              RS Puram, Coimbatore
+            </div>
+            <div style="font-size:22px; font-weight:800; color:#1a5c2a; line-height:1.15; margin-top:1px;">Suvai </div>
+          </div>
+          <div style="width:42px; height:42px; border-radius:50%; background:#1a5c2a; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 14px -6px rgba(26,92,42,.7); color:#FAF7F2; font-weight:800; font-size:15px;">MK</div>
+        </div>
+
+        <!-- search bar -->
+        <div style="display:flex; align-items:center; gap:10px; background:#fff; border:1.5px solid #ece5d8; border-radius:16px; padding:13px 15px; box-shadow:0 8px 20px -14px rgba(30,40,20,.35);">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#8a8577" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.5" y2="16.5"></line></svg>
+          <span style="color:#a7a294; font-size:14px; font-weight:500; white-space:nowrap;">Search idli, dosa, kothu...</span>
+        </div>
+
+        <!-- filter chips -->
+        <div class="noscroll" style="display:flex; gap:8px; overflow-x:auto; padding: 12px 2px 14px; scroll-behavior:smooth;">
+          <sc-for list="{{ chips }}" as="c" hint-placeholder-count="6">
+            <button onClick="{{ c.onClick }}" style="{{ c.style }}">
+              <sc-if value="{{ c.certified }}" hint-placeholder-val="{{ true }}">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="{{ c.iconColor }}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><path d="M9 12l2 2 4-4"></path><circle cx="12" cy="12" r="9"></circle></svg>
+              </sc-if>
+              <span style="white-space:nowrap;">{{ c.label }}</span>
+            </button>
+          </sc-for>
+        </div>
+      </div>
+
+      <!-- ===== Near Me FAB ===== -->
+      <button onClick="{{ recenter }}" style="{{ fabStyle }}">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3"></path><circle cx="12" cy="12" r="8" opacity=".55"></circle></svg>
+        <span style="font-size:13px; font-weight:700; color:#fff;">Near Me</span>
+      </button>
+
+      <!-- ===== BOTTOM SHEET ===== -->
+      <div style="{{ sheetStyle }}">
+        <div onPointerDown="{{ onDragStart }}" style="padding:10px 0 6px; cursor:grab; touch-action:none;">
+          <div style="width:42px; height:5px; border-radius:3px; background:#d8d1c4; margin:0 auto;"></div>
+        </div>
+        <div style="display:flex; align-items:baseline; justify-content:space-between; padding: 2px 20px 12px;">
+          <div style="font-size:16px; font-weight:800; color:#173d1f;">{{ resultCount }} stalls near you</div>
+          <div style="font-size:12.5px; font-weight:700; color:#E87722;">Sort: Nearest</div>
+        </div>
+
+        <div class="noscroll" style="flex:1; overflow-y:auto; padding: 0 16px 46px;">
+          <sc-for list="{{ vendors }}" as="v" hint-placeholder-count="5">
+            <div onClick="{{ v.onClick }}" style="{{ v.cardStyle }}">
+              <div style="{{ v.tileStyle }}">
+                <span style="display:flex; opacity:.97;" innerHTML="{{ v.icon }}"></span>
+                <sc-if value="{{ v.cornerBadge }}" hint-placeholder-val="{{ true }}">
+                  <div style="position:absolute; top:6px; left:6px; width:20px; height:20px; border-radius:50%; background:#1a5c2a; display:flex; align-items:center; justify-content:center; border:2px solid #fff;">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4 10-10"></path></svg>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ v.heroBadge }}" hint-placeholder-val="{{ false }}">
+                  <div style="position:absolute; top:-8px; left:-8px; width:32px; height:32px; display:flex; align-items:center; justify-content:center; filter: drop-shadow(0 3px 5px rgba(0,0,0,.35));">
+                    <svg width="32" height="32" viewBox="0 0 24 24"><path d="M12 2l7 3v6c0 5-3 8.5-7 10-4-1.5-7-5-7-10V5z" fill="#1a5c2a" stroke="#fff" stroke-width="1.4"></path><path d="M8.3 12.2l2.4 2.4 4.6-4.8" fill="none" stroke="#fff" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                  </div>
+                </sc-if>
+              </div>
+
+              <div style="flex:1; min-width:0; padding: 2px 0;">
+                <div class="ta" style="font-size:15.5px; font-weight:700; color:#173d1f; line-height:1.2;">{{ v.nameTa }}</div>
+                <div style="font-size:12.5px; font-weight:600; color:#6f6a5c; margin-top:1px;">{{ v.nameEn }}</div>
+                <div style="display:flex; align-items:center; gap:8px; margin-top:8px; flex-wrap:wrap;">
+                  <span style="{{ v.typeStyle }}">{{ v.type }}</span>
+                  <span style="display:flex; align-items:center; gap:3px; font-size:12.5px; font-weight:700; color:#173d1f;">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="#E87722"><path d="M12 2l2.9 6.2 6.8.8-5 4.6 1.3 6.7L12 18.7 5.9 22l1.3-6.7-5-4.6 6.8-.8z"></path></svg>
+                    {{ v.rating }}
+                  </span>
+                  <span style="font-size:12px; font-weight:600; color:#9a9486;">· {{ v.reviews }}</span>
+                </div>
+                <sc-if value="{{ v.showPill }}" hint-placeholder-val="{{ true }}">
+                  <div style="display:inline-flex; align-items:center; gap:5px; margin-top:9px; background:#1a5c2a; padding:5px 11px 5px 7px; border-radius:20px;">
+                    <svg width="14" height="14" viewBox="0 0 24 24"><path d="M12 2l7 3v6c0 5-3 8.5-7 10-4-1.5-7-5-7-10V5z" fill="#fff" stroke="none"></path><path d="M8.3 12.2l2.4 2.4 4.6-4.8" fill="none" stroke="#1a5c2a" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    <span style="font-size:11px; font-weight:800; color:#fff; letter-spacing:.2px;">Suvai Certified</span>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ v.heroBadge }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:inline-flex; align-items:center; gap:6px; margin-top:9px; background:#1a5c2a; padding:6px 12px 6px 8px; border-radius:22px; box-shadow:0 6px 14px -6px rgba(26,92,42,.6);">
+                    <svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 2l7 3v6c0 5-3 8.5-7 10-4-1.5-7-5-7-10V5z" fill="#fff" stroke="#1a5c2a" stroke-width="0"></path><path d="M8.3 12.2l2.4 2.4 4.6-4.8" fill="none" stroke="#1a5c2a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    <span style="font-size:12px; font-weight:800; color:#fff; letter-spacing:.2px;">Suvai Certified</span>
+                  </div>
+                </sc-if>
+              </div>
+
+              <div style="display:flex; flex-direction:column; align-items:flex-end; justify-content:space-between; align-self:stretch; padding: 2px 0;">
+                <div style="font-size:11px; font-weight:800; color:#E87722; background:#fdf0e5; padding:4px 8px; border-radius:9px;">{{ v.distance }}</div>
+                <div style="width:30px; height:30px; border-radius:10px; background:#f4f1ea; display:flex; align-items:center; justify-content:center;">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8a8577" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"></path></svg>
+                </div>
+              </div>
+            </div>
+          </sc-for>
+
+          <sc-if value="{{ isEmpty }}" hint-placeholder-val="{{ false }}">
+            <div style="text-align:center; padding:40px 20px; color:#9a9486;">
+              <div style="font-size:15px; font-weight:700; color:#6f6a5c;">No stalls match this filter</div>
+              <div style="font-size:13px; margin-top:4px;">Try 'All' to see everything nearby.</div>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+
+      <!-- ===== VENDOR CTA BANNER ===== -->
+      <div style="position:absolute; left:0; right:0; bottom:72px; z-index:9; height:34px; background:#E87722; padding:0 16px; display:flex; align-items:center; justify-content:center; gap:6px; box-shadow:0 -4px 12px -8px rgba(0,0,0,.3);">
+        <span style="font-size:12.5px; font-weight:700; color:#fff; white-space:nowrap;">Are you a vendor? List your stall free →</span>
+      </div>
+
+      <!-- ===== BOTTOM NAV ===== -->
+      <div style="position:absolute; bottom:0; left:0; right:0; z-index:8; background:#fff; border-top:1px solid #ece5d8; padding: 9px 12px 20px; display:flex; justify-content:space-around; box-shadow:0 -6px 22px -16px rgba(30,40,20,.4);">
+        <sc-for list="{{ nav }}" as="n" hint-placeholder-count="4">
+          <button onClick="{{ n.onClick }}" style="background:none; border:none; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:3px; padding:2px 10px; flex:1;">
+            <div style="{{ n.iconWrap }}">
+              <span style="{{ n.iconStyle }}" innerHTML="{{ n.icon }}"></span>
+            </div>
+            <span style="font-size:10.5px; font-weight:700; color:{{ n.color }};">{{ n.label }}</span>
+          </button>
+        </sc-for>
+      </div>
+
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:460,&quot;height&quot;:910}}">
+class Component extends DCLogic {
+  state = { chip: 'All', sheet: 'half', active: null, nav: 'Discover', dragTop: null };
+
+  // snap positions (px from top of 852 screen)
+  snaps = { full: 150, half: 452, peek: 668 };
+
+  data() {
+    return [
+      { id:'v1', nameTa:'முருகன் இட்லி கடை', nameEn:'Murugan Idli Kadai', type:'Idli/Dosa', rating:'4.8', reviews:'312', distance:'0.3 km', certified:true, tile:['#E87722','#c85f12'], pin:{x:150,y:210} },
+      { id:'v2', nameTa:'செல்வா கொத்து சென்டர்', nameEn:'Selva Kothu Center', type:'Kothu', rating:'4.6', reviews:'188', distance:'0.6 km', certified:true, tile:['#c0453a','#9c342b'], pin:{x:262,y:300} },
+      { id:'v2b', nameTa:'ராஜா பானி பூரி', nameEn:'Raja Pani Puri', type:'Pani Puri', rating:'4.2', reviews:'94', distance:'0.9 km', certified:false, tile:['#2f7d4a','#1f5c34'], pin:{x:210,y:370} },
+      { id:'v3', nameTa:'அம்மா பரோட்டா ஸ்டால்', nameEn:'Amma Parotta Stall', type:'Parotta', rating:'4.5', reviews:'140', distance:'0.8 km', certified:false, tile:['#d98a1f','#b06d12'], pin:{x:110,y:470} },
+      { id:'v4', nameTa:'ஸ்ரீ பாணி பூரி மனை', nameEn:'Sri Pani Puri Manai', type:'Pani Puri', rating:'4.7', reviews:'256', distance:'1.1 km', certified:true, tile:['#2f7d4a','#1f5c34'], pin:{x:300,y:520} },
+      { id:'v5', nameTa:'கண்ணன் தோசை மனை', nameEn:'Kannan Dosai Manai', type:'Idli/Dosa', rating:'4.4', reviews:'97', distance:'1.4 km', certified:false, tile:['#E87722','#c85f12'], pin:{x:70,y:640} },
+      { id:'v6', nameTa:'வெற்றி கொத்து பார்சல்', nameEn:'Vetri Kothu Parcel', type:'Kothu', rating:'4.3', reviews:'74', distance:'1.7 km', certified:true, tile:['#c0453a','#9c342b'], pin:{x:330,y:700} },
+    ];
+  }
+
+  filtered() {
+    const c = this.state.chip;
+    return this.data().filter(v => {
+      if (c === 'All') return true;
+      if (c === 'Certified Only') return v.certified;
+      return v.type === c;
+    });
+  }
+
+  setChip(c) { this.setState({ chip: c }); }
+  setNav(n) { this.setState({ nav: n }); }
+  selectVendor(id) { this.setState({ active: id, sheet: this.state.sheet === 'peek' ? 'half' : this.state.sheet }); }
+
+  onDragStart = (e) => {
+    e.preventDefault();
+    const startY = e.clientY;
+    const base = this.snaps[this.state.sheet];
+    const move = (ev) => {
+      let t = base + (ev.clientY - startY);
+      t = Math.max(this.snaps.full - 20, Math.min(this.snaps.peek + 20, t));
+      this.setState({ dragTop: t });
+    };
+    const up = (ev) => {
+      window.removeEventListener('pointermove', move);
+      window.removeEventListener('pointerup', up);
+      const t = this.state.dragTop != null ? this.state.dragTop : base;
+      // snap to nearest
+      const entries = Object.entries(this.snaps);
+      let best = entries[0];
+      for (const en of entries) if (Math.abs(en[1] - t) < Math.abs(best[1] - t)) best = en;
+      this.setState({ sheet: best[0], dragTop: null });
+    };
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', up);
+  };
+
+  vendorIcon(id, type) {
+    const icons = {
+      // idli plate: steel plate, 3 idlis, sambar bowl + chutney, steam
+      v1: `<svg width="74" height="74" viewBox="0 0 74 74"><defs><radialGradient id="steelg" cx="35%" cy="30%" r="75%"><stop offset="0%" stop-color="#f3f1ea"/><stop offset="100%" stop-color="#cfd0cc"/></radialGradient></defs>
+        <ellipse cx="37" cy="46" rx="27" ry="15" fill="url(#steelg)" stroke="#b7b8b2" stroke-width="1"/>
+        <ellipse cx="37" cy="44" rx="21" ry="11" fill="#e7e5dd"/>
+        <circle cx="27" cy="41" r="7.2" fill="#fdfcf7" stroke="#e3e0d2" stroke-width="1"/>
+        <circle cx="41" cy="39" r="7.6" fill="#fffef9" stroke="#e3e0d2" stroke-width="1"/>
+        <circle cx="33" cy="49" r="6.8" fill="#f8f6ef" stroke="#e3e0d2" stroke-width="1"/>
+        <circle cx="52" cy="47" r="5.5" fill="#c0453a"/>
+        <path d="M48 45c1 1.5 3 1.5 4 0M48.5 48.5c1 1 3 1 4 0" stroke="#8f2e26" stroke-width="1" fill="none" stroke-linecap="round"/>
+        <circle cx="19" cy="49" r="4.6" fill="#4d7a2f"/>
+        <path d="M25 20c-2 4-1 7 1 9M35 18c-1 4 0 7 2 9M45 21c1 4 0 6-1 8" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" opacity=".8"/>
+      </svg>`,
+      // kothu parotta on tawa: dark tawa, shredded parotta pile, egg flecks, steam, spatula
+      v2: `<svg width="74" height="74" viewBox="0 0 74 74"><defs><radialGradient id="tawag" cx="50%" cy="35%" r="70%"><stop offset="0%" stop-color="#4a4a48"/><stop offset="100%" stop-color="#252422"/></radialGradient></defs>
+        <ellipse cx="37" cy="45" rx="29" ry="16" fill="url(#tawag)"/>
+        <ellipse cx="37" cy="43" rx="24" ry="12" fill="#1c1b19" opacity=".5"/>
+        <g>
+          <rect x="16" y="38" width="15" height="5" rx="2.5" fill="#f0b448" transform="rotate(-8 20 40)"/>
+          <rect x="24" y="34" width="16" height="5" rx="2.5" fill="#e79b2e" transform="rotate(6 30 36)"/>
+          <rect x="30" y="40" width="17" height="5" rx="2.5" fill="#f0b448" transform="rotate(-4 38 42)"/>
+          <rect x="20" y="44" width="16" height="5" rx="2.5" fill="#e79b2e" transform="rotate(10 28 46)"/>
+          <rect x="36" y="36" width="14" height="5" rx="2.5" fill="#f2c169" transform="rotate(-12 42 38)"/>
+        </g>
+        <circle cx="26" cy="40" r="1.3" fill="#fce9a8"/>
+        <circle cx="44" cy="41" r="1.3" fill="#fce9a8"/>
+        <circle cx="33" cy="47" r="1.1" fill="#c0453a"/>
+        <circle cx="40" cy="45" r="1.1" fill="#4d7a2f"/>
+        <path d="M22 24c-1 4 0 6 2 8M35 21c-1 4 0 7 2 9M46 25c1 3 0 6-1 8" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" opacity=".7"/>
+      </svg>`,
+      // pani puri stand-in: puris + bowl
+      default_paniPuri: `<svg width="74" height="74" viewBox="0 0 74 74"><ellipse cx="37" cy="49" rx="22" ry="8" fill="#dba85a"/><circle cx="27" cy="34" r="9" fill="#f0c878" stroke="#c68f3f" stroke-width="1.3"/><circle cx="41" cy="30" r="8" fill="#f2cd82" stroke="#c68f3f" stroke-width="1.3"/><circle cx="48" cy="40" r="7.5" fill="#eec06e" stroke="#c68f3f" stroke-width="1.3"/><circle cx="30" cy="46" r="4.5" fill="#4d7a2f"/></svg>`,
+    };
+    if (icons[id]) return icons[id];
+    if (type === 'Pani Puri') return icons.default_paniPuri;
+    return `<svg width="74" height="74" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="opacity:.95;"><path d="M4 12h16a8 8 0 0 1-16 0z"/><path d="M3 20h18"/><path d="M9 5c0 1 -1 1 -1 2M12 4c0 1 -1 1 -1 2M15 5c0 1 -1 1 -1 2"/></svg>`;
+  }
+
+  navIcon(key) {
+    const icons = {
+      Discover: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polygon points="15.5 8.5 10.5 10.5 8.5 15.5 13.5 13.5" fill="currentColor" stroke="none"/></svg>',
+      Search: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>',
+      Favourites: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.6-9.3-9C1 8.8 2.6 5.5 6 5.5c2 0 3.2 1.2 4 2.4.8-1.2 2-2.4 4-2.4 3.4 0 5 3.3 3.3 6.5C19 16.4 12 21 12 21z"/></svg>',
+      Profile: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>',
+    };
+    return icons[key];
+  }
+
+  renderVals() {
+    const vs = this.filtered();
+    const active = this.state.active;
+
+    const chipDefs = ['All','Idli/Dosa','Kothu','Parotta','Pani Puri','Certified Only'];
+    const chips = chipDefs.map(label => {
+      const on = this.state.chip === label;
+      const cert = label === 'Certified Only';
+      return {
+        label, certified: cert,
+        iconColor: on ? '#fff' : '#1a5c2a',
+        onClick: () => this.setChip(label),
+        style: `display:flex; align-items:center; gap:5px; flex:none; cursor:pointer; border:1.5px solid ${on?'#1a5c2a':'#e4ddce'}; background:${on?'#1a5c2a':'#fff'}; color:${on?'#fff':'#4a4636'}; font-family:inherit; font-size:13px; font-weight:700; padding:8px 14px; border-radius:22px; transition:all .15s;`,
+      };
+    });
+
+    const typeColors = { 'Idli/Dosa':'#E87722', 'Kothu':'#c0453a', 'Parotta':'#d98a1f', 'Pani Puri':'#2f7d4a' };
+    const vendors = vs.map(v => {
+      const heroBadge = v.id === 'v1' && v.certified;
+      return {
+        ...v,
+        onClick: () => this.selectVendor(v.id),
+        icon: this.vendorIcon(v.id, v.type),
+        heroBadge,
+        cornerBadge: v.certified && !heroBadge,
+        showPill: v.certified && !heroBadge,
+        cardStyle: `display:flex; gap:12px; background:#fff; border:1.5px solid ${active===v.id?'#E87722':'#f0ebe0'}; border-radius:18px; padding:12px; margin-bottom:11px; cursor:pointer; box-shadow:${active===v.id?'0 10px 24px -14px rgba(232,119,34,.6)':'0 6px 16px -14px rgba(30,40,20,.4)'}; transition:all .15s;`,
+        tileStyle: `position:relative; flex:none; width:74px; height:74px; border-radius:14px; display:flex; align-items:center; justify-content:center; background:linear-gradient(140deg, ${v.tile[0]}, ${v.tile[1]});`,
+        typeStyle: `font-size:11px; font-weight:800; color:${typeColors[v.type]||'#1a5c2a'}; background:${(typeColors[v.type]||'#1a5c2a')}18; padding:3px 8px; border-radius:8px;`,
+      };
+    });
+
+    const pins = this.data().map(v => {
+      const on = active === v.id;
+      const sz = on ? 40 : 30;
+      return {
+        color: v.certified ? '#1a5c2a' : '#E87722',
+        certified: v.certified,
+        size: sz,
+        onClick: () => this.selectVendor(v.id),
+        style: `position:absolute; left:${v.pin.x}px; top:${v.pin.y}px; transform:translate(-50%,-100%) scale(${on?1.15:1}); cursor:pointer; z-index:${on?3:2}; transition:transform .15s;`,
+        wrapStyle: `animation: pindrop .4s cubic-bezier(.2,.8,.3,1.2) both;`,
+      };
+    });
+
+    const navDefs = ['Discover','Search','Favourites','Profile'];
+    const nav = navDefs.map(label => {
+      const on = this.state.nav === label;
+      return {
+        label, icon: this.navIcon(label),
+        onClick: () => this.setNav(label),
+        color: on ? '#1a5c2a' : '#a7a294',
+        iconWrap: `color:${on?'#1a5c2a':'#a7a294'}; display:flex; align-items:center; justify-content:center; transition:color .15s;`,
+        iconStyle: `display:flex;`,
+      };
+    });
+
+    const top = this.state.dragTop != null ? this.state.dragTop : this.snaps[this.state.sheet];
+    const sheetStyle = `position:absolute; left:0; right:0; top:${top}px; bottom:106px; z-index:6; background:#FAF7F2; border-radius:26px 26px 0 0; box-shadow:0 -14px 34px -18px rgba(20,40,20,.45); display:flex; flex-direction:column; transition:${this.state.dragTop!=null?'none':'top .28s cubic-bezier(.3,.9,.3,1)'}; overflow:hidden;`;
+
+    return {
+      chips, vendors, pins, nav, sheetStyle,
+      resultCount: vs.length,
+      isEmpty: vs.length === 0,
+      onDragStart: this.onDragStart,
+      recenter: () => this.setState({ active: null, sheet: 'half' }),
+      fabStyle: `position:absolute; right:16px; top:${top - 56}px; z-index:7; display:flex; align-items:center; gap:7px; background:#E87722; border:none; cursor:pointer; padding:11px 16px; border-radius:26px; box-shadow:0 10px 22px -8px rgba(232,119,34,.7); transition:top .28s cubic-bezier(.3,.9,.3,1);`,
+    };
+  }
+}
+</script>
+</body>
+</html>

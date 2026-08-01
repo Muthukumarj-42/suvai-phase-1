@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="./image-slot.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body { background: #e9e4db; font-family: 'Manrope', 'Noto Sans Tamil', sans-serif; }
+    a { color: #1a5c2a; text-decoration: none; }
+    a:hover { color: #E87722; }
+    .ta { font-family: 'Noto Sans Tamil', sans-serif; }
+    .noscroll::-webkit-scrollbar { display: none; }
+  </style>
+</helmet>
+
+<div style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 28px 16px; background: radial-gradient(circle at 50% 0%, #f3efe7, #ded7cb);">
+  <div style="position: relative; width: 393px; height: 852px; border-radius: 44px; background: #0f2417; padding: 11px; box-shadow: 0 40px 90px -30px rgba(20,50,30,.55), 0 0 0 2px rgba(255,255,255,.04) inset;">
+    <div style="position: relative; width: 100%; height: 100%; border-radius: 34px; overflow: hidden; background: #FAF7F2; display:flex; flex-direction:column;">
+
+      <!-- ===== SCROLLABLE CONTENT ===== -->
+      <div class="noscroll" style="flex:1; overflow-y:auto; padding-bottom:118px;">
+
+        <!-- HERO -->
+        <div style="position:relative; width:100%; height:298px;">
+          <svg viewBox="0 0 393 298" width="100%" height="100%" style="display:block;" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <radialGradient id="bgGlow" cx="50%" cy="35%" r="75%"><stop offset="0%" stop-color="#fff4de"/><stop offset="100%" stop-color="#e8cf8f"/></radialGradient>
+              <radialGradient id="steelHero" cx="35%" cy="28%" r="75%"><stop offset="0%" stop-color="#f6f4ee"/><stop offset="100%" stop-color="#d2d3cd"/></radialGradient>
+            </defs>
+            <rect width="393" height="298" fill="url(#bgGlow)"/>
+            <path d="M0 250 C 60 220, 100 260, 170 235 C 250 205, 320 250, 393 220 L 393 298 L 0 298 Z" fill="#3f7a3a"/>
+            <path d="M0 260 C 70 235, 120 268, 190 245 C 260 220, 330 258, 393 232 L 393 298 L 0 298 Z" fill="#2f6b3a"/>
+            <ellipse cx="196" cy="205" rx="150" ry="58" fill="url(#steelHero)" stroke="#b7b8b2" stroke-width="1.5"/>
+            <ellipse cx="196" cy="200" rx="118" ry="44" fill="#e7e5dd"/>
+            <circle cx="150" cy="188" r="30" fill="#fdfcf7" stroke="#e3e0d2" stroke-width="1.5"/>
+            <circle cx="205" cy="180" r="32" fill="#fffef9" stroke="#e3e0d2" stroke-width="1.5"/>
+            <circle cx="175" cy="215" r="28" fill="#f8f6ef" stroke="#e3e0d2" stroke-width="1.5"/>
+            <circle cx="272" cy="205" r="24" fill="#c0453a"/>
+            <path d="M258 198c4 6 12 6 16 0M258.5 210c4 4 12 4 16 0" stroke="#8f2e26" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+            <circle cx="102" cy="212" r="19" fill="#4d7a2f"/>
+            <circle cx="98" cy="210" r="6" fill="#e8f0dc" opacity=".5"/>
+            <circle cx="288" cy="230" r="16" fill="#fdfcf7" stroke="#e3e0d2" stroke-width="1.2"/>
+            <ellipse cx="288" cy="230" rx="9" ry="7" fill="#f2ede0"/>
+            <path d="M112 96c-8 16-4 28 4 36M180 84c-4 16 0 30 8 38M245 92c6 14 2 26-4 34" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" opacity=".55"/>
+          </svg>
+          <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.38) 0%, rgba(0,0,0,0) 22%, rgba(0,0,0,0) 60%, rgba(0,0,0,.5) 100%); pointer-events:none;"></div>
+
+          <!-- top bar -->
+          <div style="position:absolute; top:0; left:0; right:0; display:flex; align-items:center; justify-content:space-between; padding:16px 14px 0;">
+            <button onClick="{{ goBack }}" style="width:38px; height:38px; border-radius:50%; background:rgba(20,20,18,.38); backdrop-filter:blur(3px); border:none; display:flex; align-items:center; justify-content:center; cursor:pointer;">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <div style="display:flex; gap:8px;">
+              <button style="width:38px; height:38px; border-radius:50%; background:rgba(20,20,18,.38); backdrop-filter:blur(3px); border:none; display:flex; align-items:center; justify-content:center; cursor:pointer;">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="2.7"/><circle cx="6" cy="12" r="2.7"/><circle cx="18" cy="19" r="2.7"/><line x1="8.4" y1="10.7" x2="15.6" y2="6.3"/><line x1="8.4" y1="13.3" x2="15.6" y2="17.7"/></svg>
+              </button>
+              <button onClick="{{ toggleSave }}" style="width:38px; height:38px; border-radius:50%; background:rgba(20,20,18,.38); backdrop-filter:blur(3px); border:none; display:flex; align-items:center; justify-content:center; cursor:pointer;">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="{{ bookmarkFill }}" stroke="#fff" stroke-width="2"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- certified badge -->
+          <div style="position:absolute; left:14px; bottom:14px; display:flex; align-items:center; gap:7px; background:#1a5c2a; padding:8px 14px 8px 10px; border-radius:24px; box-shadow:0 10px 22px -6px rgba(0,0,0,.5);">
+            <svg width="22" height="22" viewBox="0 0 24 24"><path d="M12 2l7 3v6c0 5-3 8.5-7 10-4-1.5-7-5-7-10V5z" fill="#fff" stroke="none"/><path d="M8.3 12.2l2.4 2.4 4.6-4.8" fill="none" stroke="#1a5c2a" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span style="font-size:13.5px; font-weight:800; color:#fff; letter-spacing:.2px; white-space:nowrap;">Suvai Certified</span>
+          </div>
+        </div>
+
+        <!-- VENDOR NAME -->
+        <div style="padding:16px 20px 0;">
+          <div class="ta" style="font-size:22px; font-weight:700; color:#173d1f; line-height:1.25;">முருகன் இட்லி கடை</div>
+          <div style="font-size:14.5px; font-weight:600; color:#6f6a5c; margin-top:2px;">Murugan Idli Kadai</div>
+
+          <div style="display:flex; align-items:center; gap:8px; margin-top:10px; flex-wrap:wrap;">
+            <span style="display:flex; align-items:center; gap:4px; font-size:13.5px; font-weight:800; color:#173d1f;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#E87722"><path d="M12 2l2.9 6.2 6.8.8-5 4.6 1.3 6.7L12 18.7 5.9 22l1.3-6.7-5-4.6 6.8-.8z"/></svg>
+              4.8
+            </span>
+            <span style="font-size:13px; font-weight:600; color:#9a9486;">· 312 reviews</span>
+            <span style="display:flex; align-items:center; gap:5px; font-size:13px; font-weight:700; color:#2f7d4a;">
+              <span style="width:7px; height:7px; border-radius:50%; background:#2f7d4a; box-shadow:0 0 0 3px #dcecdc;"></span>
+              Open Now
+            </span>
+          </div>
+
+          <!-- chips -->
+          <div style="display:flex; gap:8px; margin-top:14px; flex-wrap:wrap;">
+            <span style="font-size:12px; font-weight:800; color:#fff; background:#1a5c2a; padding:6px 13px; border-radius:20px;">Idli/Dosa</span>
+            <span style="font-size:12px; font-weight:800; color:#fff; background:#E87722; padding:6px 13px; border-radius:20px;">0.3 km away</span>
+            <span style="font-size:12px; font-weight:800; color:#1a5c2a; background:#fff; border:1.5px solid #1a5c2a; padding:5px 12px; border-radius:20px; white-space:nowrap; flex-shrink:0;">Est. 1994</span>
+          </div>
+        </div>
+
+        <div style="height:1px; background:#ece5d8; margin:20px 20px 0;"></div>
+
+        <!-- SPECIALTY -->
+        <div style="padding:18px 20px 0;">
+          <div style="font-size:16px; font-weight:800; color:#173d1f;">Specialty <span class="ta" style="font-weight:700; color:#6f6a5c; font-size:14px;">உணவு வகைகள்</span></div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:12px;">
+            <sc-for list="{{ menuItems }}" as="m" hint-placeholder-count="4">
+              <div style="display:flex; align-items:center; gap:10px; background:#fff; border:1.5px solid #f0ebe0; border-radius:14px; padding:10px 12px;">
+                <span style="width:34px; height:34px; border-radius:10px; background:#fdf0e5; display:flex; align-items:center; justify-content:center; flex:none;" innerHTML="{{ m.icon }}"></span>
+                <div style="min-width:0;">
+                  <div style="font-size:13.5px; font-weight:700; color:#173d1f;">{{ m.name }}</div>
+                  <div style="font-size:12.5px; font-weight:700; color:#E87722; margin-top:1px;">₹{{ m.price }}</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="height:1px; background:#ece5d8; margin:20px 20px 0;"></div>
+
+        <!-- LOCATION -->
+        <div style="padding:18px 20px 0;">
+          <div style="font-size:16px; font-weight:800; color:#173d1f;">Location <span class="ta" style="font-weight:700; color:#6f6a5c; font-size:14px;">இடம்</span></div>
+
+          <div style="position:relative; width:100%; height:130px; border-radius:16px; overflow:hidden; margin-top:12px; background:#eef2e6;">
+            <svg viewBox="0 0 353 130" width="100%" height="130" preserveAspectRatio="xMidYMid slice">
+              <rect width="353" height="130" fill="#eef2e6"/>
+              <rect x="-10" y="-10" width="120" height="90" rx="14" fill="#d6e5c4"/>
+              <rect x="240" y="60" width="130" height="90" rx="14" fill="#dbe7cb"/>
+              <g stroke="#f7f4ee" stroke-linecap="round"><line x1="176" y1="-10" x2="176" y2="140" stroke-width="20"/><line x1="-10" y1="80" x2="363" y2="80" stroke-width="16"/></g>
+              <g stroke="#fff" stroke-linecap="round" stroke-dasharray="1 14" opacity=".9"><line x1="176" y1="-10" x2="176" y2="140" stroke-width="2"/></g>
+            </svg>
+            <div style="position:absolute; left:50%; top:50%; transform:translate(-50%,-100%);">
+              <svg width="34" height="34" viewBox="0 0 24 24" style="filter: drop-shadow(0 4px 5px rgba(120,50,0,.35));">
+                <path d="M12 2C7.6 2 4 5.5 4 9.8c0 5.4 6.8 11.4 7.1 11.7.5.4 1.3.4 1.8 0C13.2 21.2 20 15.2 20 9.8 20 5.5 16.4 2 12 2z" fill="#E87722" stroke="#fff" stroke-width="1.6"/>
+                <path d="M9 9.5h6l-1 4H10z" fill="#fff"/><circle cx="10.3" cy="14.3" r="1" fill="#fff"/><circle cx="13.7" cy="14.3" r="1" fill="#fff"/>
+              </svg>
+            </div>
+          </div>
+
+          <div style="font-size:13.5px; font-weight:600; color:#4a4636; margin-top:12px; line-height:1.5;">Near RS Puram Bus Stop, Coimbatore — 641002</div>
+
+          <button style="display:flex; align-items:center; justify-content:center; gap:8px; width:100%; margin-top:12px; background:#fff; border:1.5px solid #1a5c2a; color:#1a5c2a; font-family:inherit; font-size:13.5px; font-weight:800; padding:12px; border-radius:14px; cursor:pointer;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1a5c2a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+            Get Directions
+          </button>
+        </div>
+
+        <div style="height:1px; background:#ece5d8; margin:20px 20px 0;"></div>
+
+        <!-- TIMINGS -->
+        <div style="padding:18px 20px 0;">
+          <div style="font-size:16px; font-weight:800; color:#173d1f;">Timings <span class="ta" style="font-weight:700; color:#6f6a5c; font-size:14px;">நேரம்</span></div>
+          <div style="margin-top:12px; display:flex; flex-direction:column; gap:10px;">
+            <div style="display:flex; align-items:center; justify-content:space-between; background:#fff; border:1.5px solid #f0ebe0; border-radius:14px; padding:12px 14px;">
+              <span style="font-size:13.5px; font-weight:700; color:#173d1f;">Morning</span>
+              <span style="font-size:13.5px; font-weight:700; color:#4a4636;">6:00 AM — 11:00 AM</span>
+              <span style="width:9px; height:9px; border-radius:50%; background:#2f7d4a; box-shadow:0 0 0 3px #dcecdc;"></span>
+            </div>
+            <div style="display:flex; align-items:center; justify-content:space-between; background:#fff; border:1.5px solid #f0ebe0; border-radius:14px; padding:12px 14px;">
+              <span style="font-size:13.5px; font-weight:700; color:#173d1f;">Evening</span>
+              <span style="font-size:13.5px; font-weight:700; color:#4a4636;">5:00 PM — 9:30 PM</span>
+              <span style="width:9px; height:9px; border-radius:50%; background:#d8d1c4;"></span>
+            </div>
+          </div>
+          <div style="font-size:12.5px; font-weight:700; color:#b33a2e; margin-top:10px;">Closed on Tuesdays</div>
+        </div>
+
+        <div style="height:1px; background:#ece5d8; margin:20px 20px 0;"></div>
+
+        <!-- REVIEWS -->
+        <div style="padding:18px 20px 4px;">
+          <div style="font-size:16px; font-weight:800; color:#173d1f;">Reviews <span class="ta" style="font-weight:700; color:#6f6a5c; font-size:14px;">விமர்சனங்கள்</span></div>
+
+          <div style="display:flex; flex-direction:column; gap:12px; margin-top:12px;">
+            <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="2">
+              <div style="background:#fff; border:1.5px solid #f0ebe0; border-radius:16px; padding:14px;">
+                <div style="display:flex; align-items:center; gap:10px;">
+                  <div style="{{ r.avatarStyle }}">{{ r.initials }}</div>
+                  <div style="flex:1; min-width:0;">
+                    <div style="font-size:13.5px; font-weight:700; color:#173d1f;">{{ r.name }}</div>
+                    <div style="display:flex; align-items:center; gap:2px; margin-top:2px;" innerHTML="{{ r.starsHtml }}"></div>
+                  </div>
+                  <span style="font-size:11.5px; font-weight:600; color:#a7a294; flex:none;">{{ r.time }}</span>
+                </div>
+                <div style="font-size:13px; color:#4a4636; line-height:1.5; margin-top:9px;">{{ r.text }}</div>
+              </div>
+            </sc-for>
+          </div>
+
+          <a href="#" style="display:block; text-align:center; font-size:13.5px; font-weight:800; color:#E87722; margin-top:14px;">See all 312 reviews →</a>
+        </div>
+      </div>
+
+      <!-- ===== STICKY BOTTOM BAR ===== -->
+      <div style="position:absolute; left:0; right:0; bottom:0; background:#FAF7F2; border-top:1px solid #ece5d8; padding:12px 16px 20px; display:flex; flex-direction:column; gap:9px; box-shadow:0 -8px 24px -16px rgba(30,40,20,.4);">
+        <button style="display:flex; align-items:center; justify-content:center; gap:9px; width:100%; background:#1a5c2a; border:none; color:#fff; font-family:inherit; font-size:14px; font-weight:800; padding:13px; border-radius:14px; cursor:pointer;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.39 1.26 4.81L2 22l5.42-1.34a9.9 9.9 0 0 0 4.62 1.15h.01c5.46 0 9.9-4.45 9.9-9.9 0-2.64-1.03-5.13-2.9-7C17.17 3.03 14.68 2 12.04 2zm0 18.09h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.16 8.16 0 0 1-1.26-4.32c0-4.53 3.7-8.22 8.26-8.22 2.2 0 4.27.86 5.83 2.42a8.15 8.15 0 0 1 2.41 5.81c0 4.53-3.7 8.17-8.25 8.17zm4.51-6.13c-.25-.12-1.46-.72-1.69-.8-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.96-.14.17-.29.19-.54.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.23-1.46-1.37-1.7-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.4-.42-.56-.42-.14-.01-.31-.01-.47-.01-.16 0-.43.06-.66.31-.23.25-.86.85-.86 2.06 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.24 3.75.59.26 1.05.41 1.41.52.59.19 1.13.16 1.55.1.47-.07 1.46-.6 1.66-1.17.21-.58.21-1.08.14-1.18-.06-.11-.22-.17-.47-.29z"/></svg>
+          <span>Share on WhatsApp <span class="ta">— இந்த கடையை Share செய்யுங்கள்</span></span>
+        </button>
+        <button style="display:flex; align-items:center; justify-content:center; gap:8px; width:100%; background:#fff; border:1.5px solid #d8d1c4; color:#4a4636; font-family:inherit; font-size:12.5px; font-weight:700; padding:10px; border-radius:14px; cursor:pointer;">
+          <span>Write a Review <span class="ta">— உங்கள் அனுபவம் சொல்லுங்கள்</span></span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:460,&quot;height&quot;:910}}">
+class Component extends DCLogic {
+  state = { saved: false };
+
+  stars(n) {
+    let s = '';
+    for (let i = 0; i < 5; i++) {
+      const fill = i < n ? '#E87722' : '#e6e1d3';
+      s += `<svg width="13" height="13" viewBox="0 0 24 24" fill="${fill}"><path d="M12 2l2.9 6.2 6.8.8-5 4.6 1.3 6.7L12 18.7 5.9 22l1.3-6.7-5-4.6 6.8-.8z"/></svg>`;
+    }
+    return s;
+  }
+
+  renderVals() {
+    const menuItems = [
+      { name: 'Idli', price: 20, icon: `<svg width="26" height="26" viewBox="0 0 24 24"><ellipse cx="12" cy="17" rx="9" ry="2.6" fill="#d8d4c4"/><ellipse cx="12" cy="12.5" rx="8" ry="6" fill="#fffef9" stroke="#e3ded0" stroke-width="1"/></svg>` },
+      { name: 'Vada', price: 25, icon: `<svg width="26" height="26" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="#d9963c" stroke="#b5762a" stroke-width="1"/><circle cx="12" cy="12" r="3" fill="#fff8ec"/></svg>` },
+      { name: 'Pongal', price: 30, icon: `<svg width="26" height="26" viewBox="0 0 24 24"><path d="M4 12h16a8 8 0 0 1-16 0z" fill="#f2c257"/><ellipse cx="12" cy="12" rx="8" ry="2.4" fill="#f8d888"/><path d="M3 20h18" stroke="#c9902c" stroke-width="1.6" stroke-linecap="round"/></svg>` },
+      { name: 'Sambar Idli', price: 35, icon: `<svg width="26" height="26" viewBox="0 0 24 24"><ellipse cx="12" cy="16" rx="9" ry="3" fill="#e6903c"/><ellipse cx="12" cy="11" rx="7.5" ry="5.5" fill="#fffef9" stroke="#e3ded0" stroke-width="1"/><ellipse cx="12" cy="14.5" rx="7" ry="2.2" fill="#e6903c" opacity=".85"/></svg>` },
+    ];
+
+    const reviews = [
+      { initials: 'RK', name: 'Karthik R', time: '2 days ago', stars: 5, text: 'Best idli in Coimbatore. Very clean and hygienic stall.', bg: '#1a5c2a' },
+      { initials: 'PM', name: 'Priya M', time: '1 week ago', stars: 4, text: 'Sambar is amazing. Long queue every morning but totally worth it.', bg: '#E87722' },
+    ].map(r => ({
+      ...r,
+      starsHtml: this.stars(r.stars),
+      avatarStyle: `width:38px; height:38px; border-radius:50%; background:${r.bg}; color:#fff; font-size:12.5px; font-weight:800; display:flex; align-items:center; justify-content:center; flex:none;`,
+    }));
+
+    return {
+      menuItems, reviews,
+      bookmarkFill: this.state.saved ? '#E87722' : 'none',
+      toggleSave: () => this.setState(s => ({ saved: !s.saved })),
+      goBack: () => {},
+    };
+  }
+}
+</script>
+</body>
+</html>

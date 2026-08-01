@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF512F;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#DD2476;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Steam Gradient -->
+    <linearGradient id="steamGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:0.2" />
+      <stop offset="100%" style="stop-color:#FFFFFF;stop-opacity:0.9" />
+    </linearGradient>
+  </defs>
+
+  <!-- Rounded App Icon Background -->
+  <rect width="512" height="512" rx="112" fill="url(#grad1)" />
+
+  <!-- Bowl and Steam Graphic Group -->
+  <g transform="translate(106, 120)">
+    <!-- Steam Lines -->
+    <path d="M70,70 C60,40 90,20 80,0" stroke="url(#steamGrad)" stroke-width="12" stroke-linecap="round" fill="none" />
+    <path d="M150,80 C135,45 165,25 150,0" stroke="url(#steamGrad)" stroke-width="14" stroke-linecap="round" fill="none" />
+    <path d="M230,70 C220,40 250,20 240,0" stroke="url(#steamGrad)" stroke-width="12" stroke-linecap="round" fill="none" />
+    
+    <!-- Bowl Body -->
+    <path d="M10,120 L290,120 C290,200 240,240 150,240 C60,240 10,200 10,120 Z" fill="#FFFFFF" />
+    
+    <!-- Bowl Stand / Rim at Bottom -->
+    <path d="M100,240 L200,240 L180,260 L120,260 Z" fill="#E2E8F0" />
+    
+    <!-- Chopsticks -->
+    <line x1="220" y1="50" x2="30" y2="140" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" />
+    <line x1="240" y1="65" x2="50" y2="155" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" />
+
+    <!-- A small green leaf on the side of the bowl to represent fresh ingredients/taste -->
+    <path d="M260,110 C280,110 290,130 280,140 C270,150 250,140 250,130 C250,120 255,110 260,110 Z" fill="#4ADE80" />
+  </g>
+</svg>

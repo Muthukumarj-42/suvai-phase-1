@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+Tamil:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body { background: #e9e4db; font-family: 'Manrope', 'Noto Sans Tamil', sans-serif; }
+    a { color: #1a5c2a; text-decoration: none; }
+    a:hover { color: #E87722; }
+    .ta { font-family: 'Noto Sans Tamil', sans-serif; }
+    .noscroll::-webkit-scrollbar { display: none; }
+  </style>
+</helmet>
+
+<div style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 28px 16px; background: radial-gradient(circle at 50% 0%, #f3efe7, #ded7cb);">
+  <div style="position: relative; width: 393px; height: 852px; border-radius: 44px; background: #0f2417; padding: 11px; box-shadow: 0 40px 90px -30px rgba(20,50,30,.55), 0 0 0 2px rgba(255,255,255,.04) inset;">
+    <div style="position: relative; width: 100%; height: 100%; border-radius: 34px; overflow: hidden; background: #FAF7F2; display:flex; flex-direction:column;">
+
+      <!-- status bar -->
+      <div style="height: 20px; display:flex; align-items:center; justify-content:space-between; padding: 8px 20px 0; font-size:12px; font-weight:700; color:#1a5c2a; flex:none;">
+        <span>9:41</span>
+        <span style="letter-spacing:2px;">••• ▪ ⬤</span>
+      </div>
+
+      <!-- top bar -->
+      <div style="display:flex; align-items:center; justify-content:space-between; padding:12px 20px 4px; flex:none;">
+        <div style="font-size:18px; font-weight:800; color:#1a5c2a;">Suvai <span class="ta" style="font-weight:700; color:#173d1f;">சுவை</span></div>
+        <div style="display:flex; align-items:center; gap:5px; background:#1a5c2a; padding:6px 12px 6px 8px; border-radius:18px;">
+          <svg width="14" height="14" viewBox="0 0 24 24"><path d="M12 2l7 3v6c0 5-3 8.5-7 10-4-1.5-7-5-7-10V5z" fill="#fff" stroke="none"/><path d="M8.3 12.2l2.4 2.4 4.6-4.8" fill="none" stroke="#1a5c2a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span style="font-size:11px; font-weight:800; color:#fff; white-space:nowrap;">Suvai Certified</span>
+        </div>
+      </div>
+
+      <!-- scrollable content -->
+      <div class="noscroll" style="flex:1; overflow-y:auto; padding: 14px 20px 20px;">
+
+        <!-- welcome banner -->
+        <div style="display:flex; align-items:center; gap:14px; background:linear-gradient(135deg, #1a5c2a, #276d38); border-radius:20px; padding:18px; box-shadow:0 12px 26px -14px rgba(26,92,42,.6);">
+          <div style="width:48px; height:48px; border-radius:50%; background:rgba(255,255,255,.16); display:flex; align-items:center; justify-content:center; flex:none;">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+          </div>
+          <div style="min-width:0;">
+            <div class="ta" style="font-size:16px; font-weight:800; color:#fff; line-height:1.3;">உங்கள் கடை இப்போது Live!</div>
+            <div style="font-size:12px; font-weight:600; color:#fff; margin-top:1px;">Your Stall is Now Live!</div>
+            <div class="ta" style="font-size:11.5px; font-weight:600; color:#d3e8d6; margin-top:6px; line-height:1.4;">வாடிக்கையாளர்கள் இப்போது உங்களை கண்டுபிடிக்கலாம்<br/><span style="font-family:'Manrope',sans-serif;">Customers can now find you</span></div>
+          </div>
+        </div>
+
+        <!-- stats row -->
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-top:16px;">
+          <sc-for list="{{ stats }}" as="st" hint-placeholder-count="3">
+            <div style="background:#fff; border:1.5px solid #f0ebe0; border-radius:16px; padding:14px 8px; text-align:center;">
+              <span style="display:flex; justify-content:center;" innerHTML="{{ st.icon }}"></span>
+              <div style="font-size:21px; font-weight:800; color:#173d1f; margin-top:6px;">{{ st.value }}</div>
+              <div class="ta" style="font-size:10.5px; font-weight:700; color:#6f6a5c; margin-top:3px; line-height:1.3;">{{ st.label }}</div>
+            </div>
+          </sc-for>
+        </div>
+
+        <!-- action buttons -->
+        <div style="display:flex; flex-direction:column; gap:10px; margin-top:16px;">
+          <button style="display:flex; align-items:center; justify-content:center; gap:9px; width:100%; background:#E87722; border:none; color:#fff; font-family:inherit; font-size:14px; font-weight:800; padding:15px; border-radius:16px; cursor:pointer; box-shadow:0 10px 20px -10px rgba(232,119,34,.6);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C7.6 2 4 5.5 4 9.8c0 5.4 6.8 11.4 7.1 11.7.5.4 1.3.4 1.8 0C13.2 21.2 20 15.2 20 9.8 20 5.5 16.4 2 12 2z"/><circle cx="12" cy="9.6" r="3"/></svg>
+            <span class="ta">எனது இடத்தை புதுப்பிக்கவும்</span>
+          </button>
+          <button style="display:flex; align-items:center; justify-content:center; gap:9px; width:100%; background:#fff; border:1.5px solid #1a5c2a; color:#1a5c2a; font-family:inherit; font-size:14px; font-weight:800; padding:15px; border-radius:16px; cursor:pointer;">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="#1a5c2a"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.39 1.26 4.81L2 22l5.42-1.34a9.9 9.9 0 0 0 4.62 1.15h.01c5.46 0 9.9-4.45 9.9-9.9 0-2.64-1.03-5.13-2.9-7C17.17 3.03 14.68 2 12.04 2z"/></svg>
+            <span class="ta">என் Profile Share செய்யுங்கள்</span>
+          </button>
+        </div>
+
+        <!-- profile preview -->
+        <div style="margin-top:22px;">
+          <div style="font-size:15px; font-weight:800; color:#173d1f;">My Profile Preview <span class="ta" style="font-weight:700; color:#6f6a5c; font-size:13px;">எனது Profile</span></div>
+          <div style="display:flex; align-items:center; gap:12px; background:#fff; border:1.5px solid #f0ebe0; border-radius:16px; padding:12px; margin-top:10px;">
+            <div style="width:56px; height:56px; border-radius:12px; flex:none; background:linear-gradient(140deg,#E87722,#c85f12); display:flex; align-items:center; justify-content:center;">
+              <svg width="30" height="30" viewBox="0 0 24 24"><ellipse cx="12" cy="18.5" rx="9.5" ry="2.6" fill="#2f6b3a" opacity=".9"/><circle cx="8" cy="12" r="3.4" fill="#fff" stroke="#e9e2d2" stroke-width="1"/><circle cx="8" cy="12" r="1" fill="#c9482f"/><circle cx="15.5" cy="9.5" r="3.4" fill="#fff" stroke="#e9e2d2" stroke-width="1"/><circle cx="15.5" cy="9.5" r="1" fill="#c9482f"/><circle cx="15" cy="15.5" r="3" fill="#fff" stroke="#e9e2d2" stroke-width="1"/></svg>
+            </div>
+            <div style="flex:1; min-width:0;">
+              <div class="ta" style="font-size:14.5px; font-weight:700; color:#173d1f; line-height:1.2;">முருகன் இட்லி கடை</div>
+              <div style="font-size:12px; font-weight:600; color:#6f6a5c; margin-top:1px;">Murugan Idli Kadai</div>
+              <div style="display:flex; align-items:center; gap:6px; margin-top:6px;">
+                <span style="display:flex; align-items:center; gap:3px; font-size:12px; font-weight:700; color:#173d1f;">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="#E87722"><path d="M12 2l2.9 6.2 6.8.8-5 4.6 1.3 6.7L12 18.7 5.9 22l1.3-6.7-5-4.6 6.8-.8z"/></svg>
+                  4.8
+                </span>
+                <span style="font-size:11px; font-weight:800; color:#1a5c2a; background:#eaf3ea; padding:2px 8px; border-radius:8px;">Idli/Dosa</span>
+              </div>
+            </div>
+            <div style="width:26px; height:26px; border-radius:50%; background:#1a5c2a; display:flex; align-items:center; justify-content:center; flex:none;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4 10-10"/></svg>
+            </div>
+          </div>
+          <a href="#" style="display:block; font-size:12.5px; font-weight:800; color:#E87722; margin-top:9px;">Profile திருத்தவும் — Edit Profile</a>
+        </div>
+
+        <!-- recent reviews -->
+        <div style="margin-top:22px;">
+          <div style="font-size:15px; font-weight:800; color:#173d1f;">Recent Reviews <span class="ta" style="font-weight:700; color:#6f6a5c; font-size:13px;">சமீபத்திய விமர்சனங்கள்</span></div>
+          <div style="display:flex; flex-direction:column; gap:10px; margin-top:10px;">
+            <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="2">
+              <div style="background:#fff; border:1.5px solid #f0ebe0; border-radius:16px; padding:13px;">
+                <div style="display:flex; align-items:center; gap:9px;">
+                  <div style="{{ r.avatarStyle }}">{{ r.initials }}</div>
+                  <div style="flex:1; min-width:0;">
+                    <div style="font-size:13px; font-weight:700; color:#173d1f;">{{ r.name }}</div>
+                    <div style="display:flex; align-items:center; gap:2px; margin-top:2px;" innerHTML="{{ r.starsHtml }}"></div>
+                  </div>
+                  <span style="font-size:11px; font-weight:600; color:#a7a294; flex:none;">{{ r.time }}</span>
+                </div>
+                <div style="font-size:12.5px; color:#4a4636; line-height:1.5; margin-top:8px;">{{ r.text }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <!-- verification status -->
+        <div style="margin-top:22px;">
+          <div style="font-size:15px; font-weight:800; color:#173d1f; margin-bottom:10px;">Verification Status <span class="ta" style="font-weight:700; color:#6f6a5c; font-size:13px;">சரிபார்ப்பு நிலை</span></div>
+          <div style="display:flex; align-items:center; gap:12px; background:#1a5c2a; border-radius:16px; padding:14px 16px;">
+            <svg width="26" height="26" viewBox="0 0 24 24" style="flex:none;"><path d="M12 2l7 3v6c0 5-3 8.5-7 10-4-1.5-7-5-7-10V5z" fill="#fff" stroke="none"/><path d="M8.3 12.2l2.4 2.4 4.6-4.8" fill="none" stroke="#1a5c2a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div>
+              <div style="font-size:13.5px; font-weight:800; color:#fff;">Suvai Certified</div>
+              <div class="ta" style="font-size:11.5px; font-weight:600; color:#d3e8d6; margin-top:2px; line-height:1.4;">உங்கள் சுகாதாரம் சரிபார்க்கப்பட்டது<br/><span style="font-family:'Manrope',sans-serif;">Hygiene Verified</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- bottom nav -->
+      <div style="flex:none; background:#fff; border-top:1px solid #ece5d8; padding: 9px 12px 20px; display:flex; justify-content:space-around; box-shadow:0 -6px 22px -16px rgba(30,40,20,.4);">
+        <sc-for list="{{ nav }}" as="n" hint-placeholder-count="4">
+          <button onClick="{{ n.onClick }}" style="background:none; border:none; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:3px; padding:2px 8px; flex:1;">
+            <span style="{{ n.iconWrap }}" innerHTML="{{ n.icon }}"></span>
+            <span class="ta" style="font-size:10px; font-weight:700; color:{{ n.color }}; white-space:nowrap;">{{ n.label }}</span>
+          </button>
+        </sc-for>
+      </div>
+
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:460,&quot;height&quot;:910}}">
+class Component extends DCLogic {
+  state = { nav: 'Home' };
+
+  stars(n) {
+    let s = '';
+    for (let i = 0; i < 5; i++) {
+      const fill = i < n ? '#E87722' : '#e6e1d3';
+      s += `<svg width="12" height="12" viewBox="0 0 24 24" fill="${fill}"><path d="M12 2l2.9 6.2 6.8.8-5 4.6 1.3 6.7L12 18.7 5.9 22l1.3-6.7-5-4.6 6.8-.8z"/></svg>`;
+    }
+    return s;
+  }
+
+  navIcon(key) {
+    const icons = {
+      Home: '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>',
+      Profile: '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>',
+      Reviews: '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.9 6.2 6.8.8-5 4.6 1.3 6.7L12 18.7 5.9 22l1.3-6.7-5-4.6 6.8-.8z"/></svg>',
+      Settings: '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.6-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9c.2.6.7 1 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>',
+    };
+    return icons[key];
+  }
+
+  renderVals() {
+    const statIcons = [
+      `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E87722" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>`,
+      `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1a5c2a" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg>`,
+      `<svg width="22" height="22" viewBox="0 0 24 24" fill="#E87722"><path d="M12 2l2.9 6.2 6.8.8-5 4.6 1.3 6.7L12 18.7 5.9 22l1.3-6.7-5-4.6 6.8-.8z"/></svg>`,
+    ];
+    const statLabels = ["இன்று பார்வைகள்","இந்த வாரம்","விமர்சனங்கள்"];
+    const statsOut = [47,312,28].map((v,i) => ({ value: v, icon: statIcons[i], label: statLabels[i] }));
+
+    const reviews = [
+      { initials: 'RK', name: 'Karthik R', time: '2 days ago', stars: 5, text: 'Best idli in Coimbatore.', bg: '#1a5c2a' },
+      { initials: 'PM', name: 'Priya M', time: '1 week ago', stars: 4, text: 'Sambar is amazing.', bg: '#E87722' },
+    ].map(r => ({
+      ...r,
+      starsHtml: this.stars(r.stars),
+      avatarStyle: `width:36px; height:36px; border-radius:50%; background:${r.bg}; color:#fff; font-size:12px; font-weight:800; display:flex; align-items:center; justify-content:center; flex:none;`,
+    }));
+
+    const navDefs = [
+      { key: 'Home', label: 'முகப்பு' },
+      { key: 'Profile', label: 'என் Profile' },
+      { key: 'Reviews', label: 'விமர்சனங்கள்' },
+      { key: 'Settings', label: 'அமைப்புகள்' },
+    ];
+    const nav = navDefs.map(d => {
+      const on = this.state.nav === d.key;
+      return {
+        label: d.label,
+        icon: this.navIcon(d.key),
+        onClick: () => this.setState({ nav: d.key }),
+        color: on ? '#1a5c2a' : '#a7a294',
+        iconWrap: `color:${on?'#1a5c2a':'#a7a294'}; display:flex; align-items:center; justify-content:center;`,
+      };
+    });
+
+    return { stats: statsOut, reviews, nav };
+  }
+}
+</script>
+</body>
+</html>
