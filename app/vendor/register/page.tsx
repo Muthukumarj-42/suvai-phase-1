@@ -53,8 +53,8 @@ const registerTranslations = {
     step3Sub: "Photos",
     stallTa: "Stall Name (Tamil)",
     stallTaSub: "Write in Tamil if possible",
-    stallEn: "Stall Name (English)",
-    stallEnSub: "English title",
+    stallEn: "Stall Name",
+    stallEnSub: "Enter your stall name",
     foodType: "Food Type",
     foodTypeSub: "Choose specialty cuisine",
     phone: "Phone Number",
@@ -70,7 +70,7 @@ const registerTranslations = {
     back: "← Back",
     alreadyRegistered: "Already registered? Login",
     alreadyRegisteredSub: "Login to dashboard",
-    errStallName: "Stall name in Tamil is required!",
+    errStallName: "Stall name is required!",
     errPhone: "Please enter a valid 10-digit phone number!",
     errLandmark: "Please enter a landmark description!",
     errPhoto: "Please upload your stall photo!"
@@ -144,8 +144,8 @@ export default function VendorRegistrationPage() {
     const newErrors: Record<string, string> = {};
 
     if (step === 1) {
-      if (!stallName.trim()) {
-        newErrors.stallName = t.errStallName;
+      if (!stallNameEn.trim()) {
+        newErrors.stallNameEn = t.errStallName;
       }
       if (!phone.trim() || !/^\d{10}$/.test(phone.replace(/\s+/g, ""))) {
         newErrors.phone = t.errPhone;
@@ -219,8 +219,8 @@ export default function VendorRegistrationPage() {
       const finalPhoto = mockPhotoUrl || photoUrl || "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=600";
 
       const payload = {
-        stall_name: stallName,
-        stall_name_en: stallNameEn.trim() ? stallNameEn : stallName,
+        stall_name: stallNameEn,
+        stall_name_en: stallNameEn,
         food_type: foodType,
         phone: phone,
         lat: parseFloat(lat) || 11.5034,
@@ -257,24 +257,7 @@ export default function VendorRegistrationPage() {
       case 1:
         return (
           <div className="space-y-5">
-            {/* Stall name input (Tamil) */}
-            <div>
-              <label className="block text-xs font-black text-[#173d1f] mb-1.5">
-                <span className="ta">{t.stallTa}</span>
-                <span className="block text-[10px] text-[#9a9486] font-bold mt-0.5">{t.stallTaSub}</span>
-              </label>
-              <input
-                type="text"
-                value={stallName}
-                onChange={(e) => setStallName(e.target.value)}
-                placeholder="உதாரணம் — முருகன் இட்லி கடை"
-                className="ta w-full bg-white border border-[#ece5d8] rounded-2xl px-4.5 py-3.5 text-sm font-bold text-[#173d1f] focus:outline-none focus:border-[#1a5c2a]"
-                style={{ borderColor: errors.stallName ? "#f87171" : stallName.trim() ? "#1a5c2a" : "#ece5d8" }}
-              />
-              {errors.stallName && <p className="text-red-500 text-xs font-bold mt-1.5 ta">{errors.stallName}</p>}
-            </div>
-
-            {/* Stall name input (English) */}
+            {/* Stall name input */}
             <div>
               <label className="block text-xs font-black text-[#173d1f] mb-1.5">
                 <span>{t.stallEn}</span>
@@ -286,7 +269,9 @@ export default function VendorRegistrationPage() {
                 onChange={(e) => setStallNameEn(e.target.value)}
                 placeholder="e.g. Murugan Idli Kadai"
                 className="w-full bg-white border border-[#ece5d8] rounded-2xl px-4.5 py-3.5 text-sm font-bold text-[#173d1f] focus:outline-none focus:border-[#1a5c2a]"
+                style={{ borderColor: errors.stallNameEn ? "#f87171" : stallNameEn.trim() ? "#1a5c2a" : "#ece5d8" }}
               />
+              {errors.stallNameEn && <p className="text-red-500 text-xs font-bold mt-1.5 ta">{errors.stallNameEn}</p>}
             </div>
 
             {/* Food Type Selector */}
