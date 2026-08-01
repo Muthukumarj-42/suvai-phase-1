@@ -16,8 +16,8 @@ const notoTa = Noto_Sans_Tamil({
 });
 
 export const metadata: Metadata = {
-  title: "Suvai - Canteen Ordering App",
-  description: "Delicious food from your college canteen, ordered in seconds.",
+  title: "Suvai - Local Food Discovery",
+  description: "Discover local street food stalls, cart vendors, and canteens in Sathyamangalam.",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,

@@ -8,7 +8,7 @@ import CategoryChip from "@/components/CategoryChip";
 import LanguageToggle from "@/components/LanguageToggle";
 import VendorCard from "@/components/VendorCard";
 import BottomNav from "@/components/BottomNav";
-import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
+import { GoogleMap, useJsApiLoader, Marker, InfoWindow } from "@react-google-maps/api";
 
 // Fallback seed profiles
 const FALLBACK_VENDORS = [
@@ -328,7 +328,7 @@ export default function DiscoveryHome() {
             <span className="ta font-extrabold">{t.location}</span>
           </div>
           <h1 className="text-2xl font-black text-[#1a5c2a] leading-none mt-0.5 select-none">
-            Suvai <span className="ta font-bold text-lg">{t.title}</span>
+            {lang === "ta" ? "சுவை" : "Suvai"}
           </h1>
         </div>
         <LanguageToggle currentLang={lang} onChange={setLang} />
@@ -412,7 +412,6 @@ export default function DiscoveryHome() {
                     }
                     isActive={selectedVendorId === v.id}
                     lang={lang}
-                    onClick={() => handleSelectVendor(v.id)}
                   />
                 </div>
               ))
@@ -457,29 +456,76 @@ export default function DiscoveryHome() {
                 ]
               }}
             >
-              {/* User location blue dot indicator */}
+              {/* User location custom blue dot indicator */}
               {userLocation && (
                 <Marker
                   position={userLocation}
-                  icon="http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+                  icon={{
+                    path: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z",
+                    fillColor: "#3b82c4",
+                    fillOpacity: 1,
+                    strokeColor: "#ffffff",
+                    strokeWeight: 2,
+                    scale: 1.2,
+                    anchor: { x: 12, y: 12 } as any
+                  }}
                   zIndex={999}
                   title="You are here"
                 />
               )}
 
-              {/* Vendor markers ONLY from supabase vendors */}
+              {/* Vendor markers ONLY from supabase vendors with custom vector pin shape */}
               {filteredVendors.map((v) => (
                 <Marker
                   key={v.id}
                   position={{ lat: v.lat || defaultCenter.lat, lng: v.lng || defaultCenter.lng }}
                   onClick={() => handleSelectVendor(v.id)}
-                  icon={
-                    v.suvai_certified
-                      ? "http://maps.google.com/mapfiles/ms/icons/green-dot.png"
-                      : "http://maps.google.com/mapfiles/ms/icons/orange-dot.png"
-                  }
+                  icon={{
+                    path: "M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z",
+                    fillColor: v.suvai_certified ? "#1a5c2a" : "#E87722",
+                    fillOpacity: 1,
+                    strokeColor: "#ffffff",
+                    strokeWeight: 1.5,
+                    scale: 1.5,
+                    anchor: { x: 12, y: 22 } as any
+                  }}
                 />
               ))}
+
+              {/* Vendor InfoWindow Details popup */}
+              {selectedVendorId && (
+                <InfoWindow
+                  position={{
+                    lat: vendors.find(v => v.id === selectedVendorId)?.lat || defaultCenter.lat,
+                    lng: vendors.find(v => v.id === selectedVendorId)?.lng || defaultCenter.lng
+                  }}
+                  onCloseClick={() => setSelectedVendorId(null)}
+                >
+                  {(() => {
+                    const v = vendors.find(v => v.id === selectedVendorId);
+                    if (!v) return null;
+                    return (
+                      <div className="p-1.5 max-w-[210px] text-[#173d1f] select-none font-sans">
+                        <h4 className="font-black text-sm pr-2.5 leading-snug">{v.stall_name_en}</h4>
+                        <div className="flex items-center gap-1.5 mt-2 text-[10px]">
+                          <span className="bg-[#1a5c2a]/10 text-[#1a5c2a] px-2 py-0.5 rounded font-black uppercase text-[8px] tracking-wide">
+                            {v.food_type.replace("_", "/")}
+                          </span>
+                          <span className="flex items-center gap-0.5 font-bold text-[#E87722]">
+                            ⭐ {v.rating ? v.rating.toFixed(1) : "New"}
+                          </span>
+                        </div>
+                        <Link
+                          href={`/vendor/${v.id}`}
+                          className="block text-[10px] font-black text-center text-white bg-[#1a5c2a] hover:bg-[#13461f] py-2 px-3.5 rounded-xl mt-3 no-underline transition-colors active:scale-95"
+                        >
+                          View Stall Profile
+                        </Link>
+                      </div>
+                    );
+                  })()}
+                </InfoWindow>
+              )}
             </GoogleMap>
           ) : (
             <>

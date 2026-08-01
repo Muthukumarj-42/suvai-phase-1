@@ -132,13 +132,13 @@ export default function ProfileClient({ vendor, items, reviews: initialReviews }
   };
 
   return (
-    <div className="w-full min-h-screen bg-[#FAF7F2] text-[#173d1f] font-sans antialiased lg:py-10 flex justify-center items-start">
+    <div className="w-full min-h-screen bg-[#FAF7F2] text-[#173d1f] font-sans antialiased pb-24 lg:pb-16 flex justify-center items-start">
       
-      {/* Centered Profile Card */}
-      <div className="w-full flex flex-col bg-[#FAF7F2] lg:max-w-[650px] lg:w-full lg:mx-auto lg:shadow-xl lg:bg-white lg:border lg:border-[#ece5d8] lg:rounded-3.5xl lg:overflow-hidden lg:pb-8">
+      {/* Outer Container (Responsive: full-width on mobile, max-w-6xl split layout on desktop) */}
+      <div className="w-full max-w-6xl mx-auto px-0 lg:px-6 flex flex-col">
         
-        {/* Curved Hero Illustration Banner */}
-        <div className="relative w-full h-[260px] md:h-[300px] select-none shrink-0 bg-gradient-to-tr from-amber-100 to-orange-50/50">
+        {/* 1. Curved Hero Illustration Banner */}
+        <div className="relative w-full h-[260px] md:h-[300px] lg:h-[340px] select-none shrink-0 bg-gradient-to-tr from-amber-100 to-orange-50/50 lg:rounded-3.5xl overflow-hidden lg:shadow-md lg:mt-6">
           <svg viewBox="0 0 393 260" className="w-full h-full object-cover" preserveAspectRatio="none">
             <defs>
               <radialGradient id="bgGlow" cx="50%" cy="35%" r="75%">
@@ -194,222 +194,239 @@ export default function ProfileClient({ vendor, items, reviews: initialReviews }
           )}
         </div>
 
-        {/* Profile Details Area */}
-        <div className="px-5 pt-5">
-          <div className="flex items-start justify-between">
-            <div>
-              <h2 className="ta text-2.5xl font-black text-[#173d1f] leading-snug">
-                {lang === "ta" ? vendor.stall_name : vendor.stall_name_en}
-              </h2>
-              {lang === "ta" && (
-                <p className="text-[14.5px] font-bold text-[#6f6a5c] mt-0.5">
-                  {vendor.stall_name_en}
-                </p>
-              )}
-            </div>
-            <LanguageToggle currentLang={lang} onChange={setLang} />
-          </div>
-
-          {/* Reviews Rating Info Row */}
-          <div className="flex items-center gap-2.5 mt-3 flex-wrap">
-            <span className="flex items-center gap-0.5 text-sm font-extrabold text-[#173d1f]">
-              <Star size={15} className="fill-[#E87722] stroke-[#E87722]" />
-              {vendor.rating ? vendor.rating.toFixed(1) : t.newRating}
-            </span>
-            <span className="text-xs font-semibold text-[#9a9486] ta">
-              · {vendor.review_count} {t.reviews}
-            </span>
-            <span className="flex items-center gap-1.5 text-xs font-extrabold text-[#2f7d4a] ta">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#2f7d4a] ring-4 ring-[#dcecdc]" />
-              {t.openNow}
-            </span>
-          </div>
-
-          {/* Tags row */}
-          <div className="flex gap-2 mt-5 flex-wrap items-center">
-            {/* Category tag reusing CategoryChip statically */}
-            <div className="pointer-events-none scale-90 origin-left">
-              <CategoryChip
-                label={t[vendor.food_type as keyof typeof t] || t.others}
-                active={true}
-                onClick={() => {}}
-              />
-            </div>
-            <span className="text-xs font-extrabold text-white bg-[#E87722] px-3.5 py-1.5 rounded-full uppercase tracking-wider">
-              0.3 km
-            </span>
-            <span className="text-xs font-extrabold text-[#1a5c2a] bg-white border-1.5 border-[#1a5c2a] px-3 py-1 rounded-full shrink-0 ta">
-              {t.est} {vendor.established_year || "1994"}
-            </span>
-          </div>
-        </div>
-
-        <div className="h-[1px] bg-[#ece5d8] mx-5 mt-6" />
-
-        {/* Menu Specialty grid */}
-        <div className="px-5 pt-5">
-          <h3 className="text-base font-extrabold text-[#173d1f] flex justify-between items-baseline">
-            <span className="ta">{t.specialty}</span>
-          </h3>
-          <div className="grid grid-cols-2 gap-3 mt-3">
-            {items.map((item, idx) => (
-              <div key={idx} className="flex items-center gap-2.5 bg-white border border-[#f0ebe0] rounded-xl p-2.5 shadow-sm">
-                <div className="w-8.5 h-8.5 rounded-lg bg-[#fdf0e5] flex items-center justify-center shrink-0 text-orange-500 font-bold">🍽️</div>
-                <div className="min-w-0">
-                  <p className="text-xs font-extrabold text-[#173d1f] leading-snug truncate">
-                    {lang === "ta" ? item.name : item.name_en}
-                  </p>
-                  <p className="text-xs font-black text-[#E87722] mt-0.5">₹{item.price}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="h-[1px] bg-[#ece5d8] mx-5 mt-6" />
-
-        {/* Location Section */}
-        <div className="px-5 pt-5">
-          <h3 className="text-base font-extrabold text-[#173d1f] ta">{t.locationTitle}</h3>
+        {/* 2. Responsive Content Grid Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 mt-6 px-4 sm:px-6 lg:px-0">
           
-          <div className="relative w-full h-[120px] rounded-2xl overflow-hidden mt-3 bg-[#eef2e6] border border-[#ece5d8]">
-            <svg viewBox="0 0 353 120" className="w-full h-full object-cover">
-              <rect width="353" height="120" fill="#eef2e6"/>
-              <rect x="-10" y="-10" width="120" height="90" rx="14" fill="#d6e5c4"/>
-              <rect x="240" y="60" width="130" height="90" rx="14" fill="#dbe7cb"/>
-              <g stroke="#f7f4ee" strokeLinecap="round">
-                <line x1="176" y1="-10" x2="176" y2="140" strokeWidth="20"/>
-                <line x1="-10" y1="80" x2="363" y2="80" strokeWidth="16"/>
-              </g>
-            </svg>
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-full">
-              <svg width="30" height="30" viewBox="0 0 24 24">
-                <path d="M12 2C7.6 2 4 5.5 4 9.8c0 5.4 6.8 11.4 7.1 11.7.5.4 1.3.4 1.8 0C13.2 21.2 20 15.2 20 9.8 20 5.5 16.4 2 12 2z" fill="#E87722" stroke="#fff" strokeWidth="1.6"/>
-              </svg>
-            </div>
-          </div>
-          <div className="flex items-center justify-between gap-3 mt-3.5 select-none">
-            <p className="text-xs font-semibold text-[#6f6a5c] flex items-center gap-1.5 flex-1 min-w-0">
-              <MapPin size={13} className="text-[#E87722] shrink-0" />
-              <span className="truncate">Near Sathyamangalam Bus Stand, Tamil Nadu</span>
-            </p>
-            <button
-              onClick={() => {
-                const url = `https://www.google.com/maps/dir/?api=1&destination=${vendor.lat || 11.5034},${vendor.lng || 77.2444}`;
-                window.open(url, "_blank");
-              }}
-              className="flex items-center gap-1.5 bg-[#1a5c2a] hover:bg-[#13461f] text-white text-[10px] font-black uppercase tracking-wider py-2 px-3.5 rounded-xl border-none cursor-pointer shadow-sm active:scale-95 transition-all shrink-0"
-            >
-              Get Directions
-            </button>
-          </div>
-        </div>
-
-        <div className="h-[1px] bg-[#ece5d8] mx-5 mt-6" />
-
-        {/* Business Timings */}
-        <div className="px-5 pt-5">
-          <h3 className="text-base font-extrabold text-[#173d1f] ta">{t.timingsTitle}</h3>
-          <div className="grid grid-cols-2 gap-3 mt-3">
-            <div className="bg-white border border-[#f0ebe0] rounded-xl p-3 text-center shadow-sm">
-              <span className="block text-[9px] font-black text-slate-400 uppercase ta">{t.morning}</span>
-              <span className="block text-xs font-black text-[#173d1f] mt-1">6:00 AM - 11:00 AM</span>
-            </div>
-            <div className="bg-white border border-[#f0ebe0] rounded-xl p-3 text-center shadow-sm">
-              <span className="block text-[9px] font-black text-slate-400 uppercase ta">{t.evening}</span>
-              <span className="block text-xs font-black text-[#173d1f] mt-1">5:00 PM - 9:30 PM</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="h-[1px] bg-[#ece5d8] mx-5 mt-6" />
-
-        {/* Customer Reviews & Submit form */}
-        <div className="px-5 pt-5 mb-24">
-          <div className="flex justify-between items-center mb-3.5">
-            <h3 className="text-base font-extrabold text-[#173d1f] ta">{t.reviews}</h3>
-            <button
-              onClick={() => setShowReviewForm((prev) => !prev)}
-              className="text-xs font-extrabold text-[#E87722] hover:underline cursor-pointer border-none bg-transparent"
-            >
-              {t.writeReview}
-            </button>
-          </div>
-
-          {showReviewForm && (
-            <form onSubmit={handleSubmitReview} className="bg-white border border-[#ece5d8] rounded-2.5xl p-5 mb-5 space-y-3.5 shadow-sm">
-              <div>
-                <label className="block text-[10px] font-black text-slate-400 uppercase mb-1 ta">{t.reviewerName}</label>
-                <input
-                  type="text"
-                  required
-                  value={reviewerName}
-                  onChange={(e) => setReviewerName(e.target.value)}
-                  placeholder="Karthik"
-                  className="w-full bg-[#FAF7F2] border border-[#ece5d8] rounded-xl p-2.5 text-xs font-bold focus:outline-none"
-                />
-              </div>
-              <div>
-                <label className="block text-[10px] font-black text-slate-400 uppercase mb-1 ta">{t.comment}</label>
-                <textarea
-                  required
-                  rows={3}
-                  value={reviewComment}
-                  onChange={(e) => setReviewComment(e.target.value)}
-                  placeholder="..."
-                  className="w-full bg-[#FAF7F2] border border-[#ece5d8] rounded-xl p-2.5 text-xs font-bold focus:outline-none"
-                />
-              </div>
-              <button
-                type="submit"
-                disabled={submittingReview}
-                className="w-full bg-[#E87722] hover:bg-[#d5671b] text-white font-extrabold text-xs py-3 rounded-xl border-none cursor-pointer flex items-center justify-center gap-1.5 shadow-sm disabled:opacity-50"
-              >
-                {submittingReview ? <Loader2 size={12} className="animate-spin" /> : <span className="ta">{t.submit}</span>}
-              </button>
-            </form>
-          )}
-
-          <div className="space-y-3.5">
-            {reviewsList.length > 0 ? (
-              reviewsList.map((rev) => (
-                <div key={rev.id} className="bg-white border border-[#f0ebe0] rounded-2.5xl p-4 shadow-[0_4px_12px_rgba(0,0,0,0.01)]">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2.5">
-                      <div className="w-8 h-8 rounded-full bg-[#1a5c2a] text-white text-[11px] font-black flex items-center justify-center">
-                        {rev.reviewer_name.slice(0, 2).toUpperCase()}
-                      </div>
-                      <span className="text-xs font-extrabold text-[#173d1f]">{rev.reviewer_name}</span>
-                    </div>
-                    <span className="text-[10px] text-[#a7a294] font-semibold">
-                      {typeof rev.created_at === "string" && !rev.created_at.includes("T") 
-                        ? rev.created_at 
-                        : new Date(rev.created_at).toLocaleDateString()}
-                    </span>
-                  </div>
-                  <p className="text-xs text-[#4a4636] leading-relaxed mt-2.5 pl-2.5 border-l-2 border-slate-100">{rev.comment}</p>
+          {/* Main Left Section: 2/3 width on desktop */}
+          <div className="lg:col-span-2 space-y-6">
+            
+            {/* Vendor Profile Header Card */}
+            <div className="bg-white border border-[#ece5d8] rounded-3xl p-6 shadow-sm">
+              <div className="flex items-start justify-between">
+                <div>
+                  <h2 className="ta text-2.5xl font-black text-[#173d1f] leading-snug">
+                    {lang === "ta" ? vendor.stall_name : vendor.stall_name_en}
+                  </h2>
+                  {lang === "ta" && (
+                    <p className="text-[14.5px] font-bold text-[#6f6a5c] mt-0.5">
+                      {vendor.stall_name_en}
+                    </p>
+                  )}
                 </div>
-              ))
-            ) : (
-              <div className="text-center py-6 text-xs font-bold text-[#9a9486] bg-white border border-dashed border-[#ece5d8] rounded-2xl p-4">
-                {t.noReviews}
+                <LanguageToggle currentLang={lang} onChange={setLang} />
               </div>
-            )}
+
+              {/* Rating metrics row */}
+              <div className="flex items-center gap-2.5 mt-3 flex-wrap">
+                <span className="flex items-center gap-0.5 text-sm font-extrabold text-[#173d1f]">
+                  <Star size={15} className="fill-[#E87722] stroke-[#E87722]" />
+                  {vendor.rating ? vendor.rating.toFixed(1) : t.newRating}
+                </span>
+                <span className="text-xs font-semibold text-[#9a9486] ta">
+                  · {vendor.review_count} {t.reviews}
+                </span>
+                <span className="flex items-center gap-1.5 text-xs font-extrabold text-[#2f7d4a] ta">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#2f7d4a] ring-4 ring-[#dcecdc]" />
+                  {t.openNow}
+                </span>
+              </div>
+
+              {/* Tags row */}
+              <div className="flex gap-2 mt-5 flex-wrap items-center">
+                <div className="pointer-events-none scale-90 origin-left">
+                  <CategoryChip
+                    label={t[vendor.food_type as keyof typeof t] || t.others}
+                    active={true}
+                    onClick={() => {}}
+                  />
+                </div>
+                <span className="text-xs font-extrabold text-white bg-[#E87722] px-3.5 py-1.5 rounded-full uppercase tracking-wider">
+                  0.3 km
+                </span>
+                <span className="text-xs font-extrabold text-[#1a5c2a] bg-white border-1.5 border-[#1a5c2a] px-3 py-1 rounded-full shrink-0 ta">
+                  {t.est} {vendor.established_year || "1994"}
+                </span>
+              </div>
+            </div>
+
+            {/* Menu Specialty list card */}
+            <div className="bg-white border border-[#ece5d8] rounded-3xl p-6 shadow-sm">
+              <h3 className="text-base font-extrabold text-[#173d1f] mb-4">
+                <span className="ta">{t.specialty}</span>
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                {items.map((item, idx) => (
+                  <div key={idx} className="flex items-center gap-3 bg-white border border-[#f0ebe0] rounded-xl p-3 shadow-sm hover:border-[#1a5c2a] transition-all">
+                    <div className="w-9 h-9 rounded-lg bg-[#fdf0e5] flex items-center justify-center shrink-0 text-orange-500 font-bold text-sm">🍽️</div>
+                    <div className="min-w-0">
+                      <p className="text-xs font-extrabold text-[#173d1f] leading-snug truncate">
+                        {lang === "ta" ? item.name : item.name_en}
+                      </p>
+                      <p className="text-xs font-black text-[#E87722] mt-0.5">₹{item.price}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Customer Reviews card */}
+            <div className="bg-white border border-[#ece5d8] rounded-3xl p-6 shadow-sm pb-8">
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-base font-extrabold text-[#173d1f] ta">{t.reviews}</h3>
+                <button
+                  onClick={() => setShowReviewForm((prev) => !prev)}
+                  className="text-xs font-extrabold text-[#E87722] hover:underline cursor-pointer border-none bg-transparent"
+                >
+                  {t.writeReview}
+                </button>
+              </div>
+
+              {showReviewForm && (
+                <form onSubmit={handleSubmitReview} className="bg-white border border-[#ece5d8] rounded-2.5xl p-5 mb-5 space-y-3.5 shadow-sm">
+                  <div>
+                    <label className="block text-[10px] font-black text-slate-400 uppercase mb-1 ta">{t.reviewerName}</label>
+                    <input
+                      type="text"
+                      required
+                      value={reviewerName}
+                      onChange={(e) => setReviewerName(e.target.value)}
+                      placeholder="Karthik"
+                      className="w-full bg-[#FAF7F2] border border-[#ece5d8] rounded-xl p-2.5 text-xs font-bold focus:outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-black text-slate-400 uppercase mb-1 ta">{t.comment}</label>
+                    <textarea
+                      required
+                      rows={3}
+                      value={reviewComment}
+                      onChange={(e) => setReviewComment(e.target.value)}
+                      placeholder="..."
+                      className="w-full bg-[#FAF7F2] border border-[#ece5d8] rounded-xl p-2.5 text-xs font-bold focus:outline-none"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    disabled={submittingReview}
+                    className="w-full bg-[#E87722] hover:bg-[#d5671b] text-white font-extrabold text-xs py-3 rounded-xl border-none cursor-pointer flex items-center justify-center gap-1.5 shadow-sm disabled:opacity-50"
+                  >
+                    {submittingReview ? <Loader2 size={12} className="animate-spin" /> : <span className="ta">{t.submit}</span>}
+                  </button>
+                </form>
+              )}
+
+              <div className="space-y-3.5">
+                {reviewsList.length > 0 ? (
+                  reviewsList.map((rev) => (
+                    <div key={rev.id} className="bg-[#FAF7F2]/50 border border-[#f0ebe0] rounded-2.5xl p-4 shadow-[0_4px_12px_rgba(0,0,0,0.01)] hover:bg-white transition-all">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2.5">
+                          <div className="w-8 h-8 rounded-full bg-[#1a5c2a] text-white text-[11px] font-black flex items-center justify-center">
+                            {rev.reviewer_name.slice(0, 2).toUpperCase()}
+                          </div>
+                          <span className="text-xs font-extrabold text-[#173d1f]">{rev.reviewer_name}</span>
+                        </div>
+                        <span className="text-[10px] text-[#a7a294] font-semibold">
+                          {typeof rev.created_at === "string" && !rev.created_at.includes("T") 
+                            ? rev.created_at 
+                            : new Date(rev.created_at).toLocaleDateString()}
+                        </span>
+                      </div>
+                      <p className="text-xs text-[#4a4636] leading-relaxed mt-2.5 pl-2.5 border-l-2 border-slate-100">{rev.comment}</p>
+                    </div>
+                  ))
+                ) : (
+                  <div className="text-center py-6 text-xs font-bold text-[#9a9486] bg-white border border-dashed border-[#ece5d8] rounded-2xl p-4">
+                    {t.noReviews}
+                  </div>
+                )}
+              </div>
+            </div>
+
           </div>
+
+          {/* Sidebar Section: 1/3 width on desktop */}
+          <div className="space-y-6 lg:sticky lg:top-4">
+            
+            {/* Timing Card */}
+            <div className="bg-white border border-[#ece5d8] rounded-3xl p-6 shadow-sm">
+              <h3 className="text-base font-extrabold text-[#173d1f] ta">{t.timingsTitle}</h3>
+              <div className="grid grid-cols-2 gap-3 mt-4">
+                <div className="bg-[#FAF7F2] border border-[#f0ebe0] rounded-xl p-3 text-center shadow-sm">
+                  <span className="block text-[9px] font-black text-slate-400 uppercase ta">{t.morning}</span>
+                  <span className="block text-xs font-black text-[#173d1f] mt-1 leading-none">6:00 AM - 11:00 AM</span>
+                </div>
+                <div className="bg-[#FAF7F2] border border-[#f0ebe0] rounded-xl p-3 text-center shadow-sm">
+                  <span className="block text-[9px] font-black text-slate-400 uppercase ta">{t.evening}</span>
+                  <span className="block text-xs font-black text-[#173d1f] mt-1 leading-none">5:00 PM - 9:30 PM</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Location preview map Card */}
+            <div className="bg-white border border-[#ece5d8] rounded-3xl p-6 shadow-sm">
+              <h3 className="text-base font-extrabold text-[#173d1f] ta">{t.locationTitle}</h3>
+              
+              <div className="relative w-full h-[120px] rounded-2xl overflow-hidden mt-3 bg-[#eef2e6] border border-[#ece5d8]">
+                <svg viewBox="0 0 353 120" className="w-full h-full object-cover">
+                  <rect width="353" height="120" fill="#eef2e6"/>
+                  <rect x="-10" y="-10" width="120" height="90" rx="14" fill="#d6e5c4"/>
+                  <rect x="240" y="60" width="130" height="90" rx="14" fill="#dbe7cb"/>
+                  <g stroke="#f7f4ee" strokeLinecap="round">
+                    <line x1="176" y1="-10" x2="176" y2="140" strokeWidth="20"/>
+                    <line x1="-10" y1="80" x2="363" y2="80" strokeWidth="16"/>
+                  </g>
+                </svg>
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-full">
+                  <svg width="30" height="30" viewBox="0 0 24 24">
+                    <path d="M12 2C7.6 2 4 5.5 4 9.8c0 5.4 6.8 11.4 7.1 11.7.5.4 1.3.4 1.8 0C13.2 21.2 20 15.2 20 9.8 20 5.5 16.4 2 12 2z" fill="#E87722" stroke="#fff" strokeWidth="1.6"/>
+                  </svg>
+                </div>
+              </div>
+              
+              <div className="flex items-center justify-between gap-3 mt-3.5 select-none">
+                <p className="text-xs font-semibold text-[#6f6a5c] flex items-center gap-1.5 flex-1 min-w-0">
+                  <MapPin size={13} className="text-[#E87722] shrink-0" />
+                  <span className="truncate">Near Sathyamangalam Bus Stand, Tamil Nadu</span>
+                </p>
+                <button
+                  onClick={() => {
+                    const url = `https://www.google.com/maps/dir/?api=1&destination=${vendor.lat || 11.5034},${vendor.lng || 77.2444}`;
+                    window.open(url, "_blank");
+                  }}
+                  className="flex items-center gap-1.5 bg-[#1a5c2a] hover:bg-[#13461f] text-white text-[10px] font-black uppercase tracking-wider py-2 px-3.5 rounded-xl border-none cursor-pointer shadow-sm active:scale-95 transition-all shrink-0"
+                >
+                  Directions
+                </button>
+              </div>
+            </div>
+
+            {/* Actions Card */}
+            <div className="bg-white border border-[#ece5d8] rounded-3xl p-6 shadow-sm">
+              <button
+                onClick={handleWhatsAppShare}
+                className="flex items-center justify-center gap-2 w-full bg-[#1a5c2a] hover:bg-[#13461f] text-white font-extrabold text-xs.5 py-4 px-4 rounded-xl border-none cursor-pointer shadow-md active:scale-95 transition-all"
+              >
+                <Share2 size={16} />
+                <span className="ta">{t.share}</span>
+              </button>
+            </div>
+
+          </div>
+
         </div>
 
-        {/* Sticky footer action button */}
-        <div className="absolute left-0 right-0 bottom-0 bg-[#FAF7F2] border-t border-[#ece5d8] p-4 flex flex-col gap-2 shadow-[0_-8px_24px_-16px_rgba(30,40,20,0.4)]
-          lg:static lg:shadow-none lg:border-none lg:p-5 shrink-0">
-          <button
-            onClick={handleWhatsAppShare}
-            className="flex items-center justify-center gap-2 w-full bg-[#1a5c2a] hover:bg-[#13461f] text-white font-extrabold text-xs.5 py-4 px-4 rounded-xl border-none cursor-pointer shadow-md"
-          >
-            <Share2 size={16} />
-            <span className="ta">{t.share}</span>
-          </button>
-        </div>
+      </div>
 
+      {/* Floating mobile footer (only visible on mobile layout size) */}
+      <div className="fixed left-0 right-0 bottom-0 bg-[#FAF7F2] border-t border-[#ece5d8] p-4 flex flex-col gap-2 shadow-[0_-8px_24px_-16px_rgba(30,40,20,0.4)] lg:hidden z-20">
+        <button
+          onClick={handleWhatsAppShare}
+          className="flex items-center justify-center gap-2 w-full bg-[#1a5c2a] hover:bg-[#13461f] text-white font-extrabold text-xs.5 py-4 px-4 rounded-xl border-none cursor-pointer shadow-md"
+        >
+          <Share2 size={16} />
+          <span className="ta">{t.share}</span>
+        </button>
       </div>
 
     </div>

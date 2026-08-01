@@ -12,6 +12,7 @@ export default function StepIndicator({ currentStep, lang }: StepIndicatorProps)
     { num: 1, labelTa: "அடிப்படை தகவல்", labelEn: "Basic Info" },
     { num: 2, labelTa: "இடம்", labelEn: "Location" },
     { num: 3, labelTa: "புகைப்படங்கள்", labelEn: "Photos" },
+    { num: 4, labelTa: "உணவு பட்டியல்", labelEn: "Menu" },
   ];
 
   return (

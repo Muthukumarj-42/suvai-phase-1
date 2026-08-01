@@ -121,6 +121,62 @@ export default function VendorRegistrationPage() {
   const [mockPhotoUrl, setMockPhotoUrl] = useState(""); // Default fallback if upload fails
   const [uploading, setUploading] = useState(false);
 
+  // Step 4 Menu Items State
+  const [menuItems, setMenuItems] = useState<{ name: string; nameEn: string; price: string }[]>([
+    { name: "இட்லி", nameEn: "Idli", price: "20" },
+    { name: "வடை", nameEn: "Vada", price: "15" }
+  ]);
+  const [newItemName, setNewItemName] = useState("");
+  const [newItemNameEn, setNewItemNameEn] = useState("");
+  const [newItemPrice, setNewItemPrice] = useState("");
+
+  const handleAddToMenu = () => {
+    if (!newItemNameEn.trim()) {
+      alert("Please enter the item name in English.");
+      return;
+    }
+    if (!newItemPrice.trim() || isNaN(parseFloat(newItemPrice)) || parseFloat(newItemPrice) <= 0) {
+      alert("Please enter a valid price greater than 0.");
+      return;
+    }
+
+    setMenuItems((prev) => [
+      ...prev,
+      {
+        name: newItemName.trim(),
+        nameEn: newItemNameEn.trim(),
+        price: parseFloat(newItemPrice).toFixed(2),
+      },
+    ]);
+
+    setNewItemName("");
+    setNewItemNameEn("");
+    setNewItemPrice("");
+  };
+
+  const handleRemoveFromMenu = (index: number) => {
+    setMenuItems((prev) => prev.filter((_, idx) => idx !== index));
+  };
+
+  const handleDetectLocation = () => {
+    if (typeof window !== "undefined" && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setLat(position.coords.latitude.toFixed(5));
+          setLng(position.coords.longitude.toFixed(5));
+          setPlacedPin(true);
+        },
+        (error) => {
+          console.warn("Geolocation detection failed:", error);
+          alert("Could not detect location. Please check browser location permissions.");
+        },
+        { enableHighAccuracy: true, timeout: 8000 }
+      );
+    } else {
+      alert("Geolocation is not supported by your browser.");
+    }
+  };
+
   const t = registerTranslations[lang];
 
   // Map Click Coordinate Setter
@@ -162,6 +218,13 @@ export default function VendorRegistrationPage() {
         return;
       }
       setStep(3);
+    } else if (step === 3) {
+      if (!photoUrl) {
+        newErrors.photo = t.errPhoto;
+        setErrors(newErrors);
+        return;
+      }
+      setStep(4);
     }
   };
 
@@ -208,8 +271,8 @@ export default function VendorRegistrationPage() {
   const handleRegisterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrors({});
-    if (!photoUrl) {
-      setErrors({ photo: t.errPhoto });
+    if (menuItems.length === 0) {
+      alert("Please add at least one item to your menu.");
       return;
     }
 
@@ -242,6 +305,22 @@ export default function VendorRegistrationPage() {
         .single();
 
       if (error) throw error;
+
+      // Insert menu items
+      if (menuItems.length > 0) {
+        const menuPayload = menuItems.map(item => ({
+          vendor_id: data.id,
+          name: item.name.trim() || item.nameEn.trim(),
+          name_en: item.nameEn.trim(),
+          price: parseFloat(item.price) || 0
+        }));
+
+        const { error: menuErr } = await supabase
+          .from("specialty_items")
+          .insert(menuPayload);
+
+        if (menuErr) console.warn("Failed to insert menu items:", menuErr);
+      }
 
       router.push(`/vendor/dashboard/${data.id}`);
     } catch (err: any) {
@@ -416,6 +495,14 @@ export default function VendorRegistrationPage() {
               </div>
             </div>
 
+            <button
+              type="button"
+              onClick={handleDetectLocation}
+              className="w-full py-3 px-4 bg-emerald-50 hover:bg-emerald-100 border border-emerald-100 rounded-xl font-extrabold text-xs text-emerald-800 flex items-center justify-center gap-2 cursor-pointer transition-colors active:scale-98 select-none"
+            >
+              📍 Use My Current Location
+            </button>
+
             {/* Landmark details */}
             <div>
               <label className="block text-xs font-black text-[#173d1f] mb-1.5">
@@ -474,6 +561,107 @@ export default function VendorRegistrationPage() {
                 )}
               </div>
               {errors.photo && <p className="text-red-500 text-xs font-bold mt-2 ta">{errors.photo}</p>}
+              {submitError && <p className="text-red-500 text-xs font-bold text-center mt-3.5 ta">{submitError}</p>}
+            </div>
+          </div>
+        );
+
+      case 4:
+        return (
+          <div className="space-y-6">
+            <div className="bg-[#FAF7F2] border border-[#ece5d8] rounded-2.5xl p-5 space-y-4">
+              <h3 className="text-sm.5 font-extrabold text-[#173d1f] flex items-center gap-1.5">
+                🍔 Add Canteen Menu Items
+              </h3>
+              <p className="text-xs text-[#6f6a5c] leading-normal">
+                List the specialty items and dishes available at your cart. Visitors will see this menu and prices directly on your profile.
+              </p>
+              
+              {/* Menu input fields */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mt-2">
+                <div>
+                  <label className="block text-[10px] font-black text-slate-500 uppercase mb-1">Item Name (English)</label>
+                  <input
+                    type="text"
+                    value={newItemNameEn}
+                    onChange={(e) => setNewItemNameEn(e.target.value)}
+                    placeholder="e.g. Plain Dosa"
+                    className="w-full bg-white border border-[#ece5d8] rounded-xl p-3 text-sm font-bold text-[#173d1f] focus:outline-none focus:border-[#1a5c2a]"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[10px] font-black text-slate-500 uppercase mb-1">Price (₹ INR)</label>
+                  <input
+                    type="number"
+                    value={newItemPrice}
+                    onChange={(e) => setNewItemPrice(e.target.value)}
+                    placeholder="e.g. 30"
+                    className="w-full bg-white border border-[#ece5d8] rounded-xl p-3 text-sm font-bold text-[#173d1f] focus:outline-none focus:border-[#1a5c2a]"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-[10px] font-black text-slate-500 uppercase mb-1">Item Name (Tamil - optional)</label>
+                <input
+                  type="text"
+                  value={newItemName}
+                  onChange={(e) => setNewItemName(e.target.value)}
+                  placeholder="உதாரணம் — சாதாரண தோசை"
+                  className="w-full bg-white border border-[#ece5d8] rounded-xl p-3 text-sm font-bold text-[#173d1f] focus:outline-none focus:border-[#1a5c2a]"
+                />
+              </div>
+
+              <button
+                type="button"
+                onClick={handleAddToMenu}
+                className="w-full py-3 bg-[#1a5c2a] hover:bg-[#13461f] text-white font-extrabold text-xs.5 rounded-xl border-none cursor-pointer active:scale-95 transition-all select-none text-center shadow-sm"
+              >
+                + Add Item to Menu
+              </button>
+            </div>
+
+            {/* Added list */}
+            <div className="space-y-2.5">
+              <h4 className="text-xs.5 font-black text-[#6f6a5c] uppercase tracking-wider">
+                Added Items ({menuItems.length})
+              </h4>
+              
+              {menuItems.length > 0 ? (
+                <div className="space-y-2 max-h-[220px] overflow-y-auto noscroll">
+                  {menuItems.map((item, index) => (
+                    <div
+                      key={index}
+                      className="bg-white border border-[#ece5d8] rounded-xl p-3.5 flex items-center justify-between shadow-sm"
+                    >
+                      <div className="min-w-0 flex-1 pr-3">
+                        <p className="text-sm font-extrabold text-[#173d1f] truncate">{item.nameEn}</p>
+                        {item.name.trim() && (
+                          <p className="text-[11px] font-bold text-[#9a9486] mt-0.5 truncate">{item.name}</p>
+                        )}
+                      </div>
+                      <div className="flex items-center gap-3.5 shrink-0">
+                        <span className="text-sm font-black text-[#E87722]">₹{item.price}</span>
+                        <button
+                          type="button"
+                          onClick={() => handleRemoveFromMenu(index)}
+                          className="p-1.5 hover:bg-red-50 text-red-500 rounded-lg border-none cursor-pointer transition-colors"
+                          title="Delete item"
+                        >
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <polyline points="3 6 5 6 21 6" />
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-6 text-slate-400 bg-white border border-dashed border-[#ece5d8] rounded-2xl p-4 text-xs font-semibold">
+                  No menu items added yet. Add at least one specialty item!
+                </div>
+              )}
               {submitError && <p className="text-red-500 text-xs font-bold text-center mt-3.5 ta">{submitError}</p>}
             </div>
           </div>
@@ -542,7 +730,7 @@ export default function VendorRegistrationPage() {
               </button>
             )}
 
-            {step < 3 ? (
+            {step < 4 ? (
               <button
                 type="button"
                 onClick={handleNextStep}
