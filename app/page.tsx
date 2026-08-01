@@ -448,6 +448,7 @@ export default function DiscoveryHome() {
               options={{
                 disableDefaultUI: true,
                 zoomControl: true,
+                gestureHandling: "greedy",
                 styles: [
                   {
                     featureType: "poi",

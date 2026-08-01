@@ -148,20 +148,15 @@ export default function VendorDashboardPage({ params }: { params: Promise<{ id: 
   ];
 
   return (
-    <div className="w-full min-h-screen bg-radial from-[#f3efe7] to-[#ded7cb] text-[#173d1f] font-sans antialiased py-6 px-4 md:py-12 md:px-8 flex justify-center items-start overflow-y-auto">
+    <div className="w-full min-h-screen bg-radial from-[#f3efe7] to-[#ded7cb] text-[#173d1f] font-sans antialiased md:py-12 md:px-8 flex justify-center items-start overflow-y-auto">
       
       {/* ========================================================= */}
-      {/* ===== 1. MOBILE VIEW (md:hidden - centered device shell) ===== */}
+      {/* ===== 1. MOBILE VIEW (md:hidden - full-screen mobile view) ===== */}
       {/* ========================================================= */}
-      <div className="md:hidden w-[393px] h-[830px] rounded-[44px] bg-[#0f2417] p-[11px] shadow-[0_40px_90px_-30px_rgba(20,50,30,0.55)] border border-white/5 overflow-hidden flex flex-col relative select-none">
-        <div className="relative w-full h-full rounded-[34px] bg-[#FAF7F2] overflow-hidden flex flex-col">
+      <div className="md:hidden w-full min-h-screen bg-[#FAF7F2] flex flex-col relative">
+        <div className="relative w-full flex-1 flex flex-col">
           
-          <div className="h-5 flex items-center justify-between text-[11px] font-extrabold text-[#1a5c2a] px-5 pt-2 select-none shrink-0">
-            <span>9:41</span>
-            <span className="tracking-widest">••• ▪ ⬤</span>
-          </div>
-
-          <header className="flex items-center justify-between px-5 py-3 shrink-0">
+          <header className="flex items-center justify-between px-5 py-4 shrink-0 border-b border-[#ece5d8] bg-white">
             <h1 className="text-lg font-black text-[#1a5c2a]">
               Suvai <span className="ta font-bold text-xs">சுவை</span>
             </h1>

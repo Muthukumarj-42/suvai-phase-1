@@ -1,5 +1,5 @@
 import React from "react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Star, ChevronRight } from "lucide-react";
 
 interface VendorCardProps {
@@ -161,14 +161,27 @@ export default function VendorCard({
 }: VendorCardProps) {
   const style = typeStyles[foodType] || typeStyles.others;
   const t = cardTranslations[lang];
+  const router = useRouter();
 
-  const cardContent = (
+  const handleCardClick = (e: React.MouseEvent) => {
+    // If the user clicked inside the directions action button, ignore card routing
+    if ((e.target as HTMLElement).closest(".directions-btn")) {
+      return;
+    }
+    if (onClick) {
+      onClick();
+    } else {
+      router.push(`/vendor/${id}`);
+    }
+  };
+
+  return (
     <div
-      onClick={onClick}
-      className={`flex gap-3 bg-white border rounded-2.5xl p-3 cursor-pointer transition-all duration-150 relative ${
+      onClick={handleCardClick}
+      className={`flex gap-4 bg-white border rounded-2.5xl p-4 cursor-pointer transition-all duration-200 relative select-none hover:-translate-y-0.5 active:scale-[0.99] ${
         isActive
-          ? "border-[#E87722] shadow-[0_10px_24px_-14px_rgba(232,119,34,0.6)]"
-          : "border-[#f0ebe0] shadow-[0_6px_16px_-14px_rgba(30,40,20,0.4)] hover:border-slate-300"
+          ? "border-[#E87722] ring-2 ring-[#E87722]/20 shadow-[0_10px_24px_-14px_rgba(232,119,34,0.6)]"
+          : "border-[#f0ebe0] shadow-[0_6px_16px_-14px_rgba(30,40,20,0.15)] hover:border-[#d0c9bd] hover:shadow-[0_8px_20px_-10px_rgba(30,40,20,0.25)]"
       }`}
     >
       {/* Food Icon / Gradient Box */}
@@ -255,7 +268,7 @@ export default function VendorCard({
               window.open(directionsUrl, "_blank");
             }}
             title="Get Directions"
-            className="w-7 h-7 rounded-lg bg-emerald-50 hover:bg-emerald-100 border border-emerald-100 flex items-center justify-center text-emerald-700 cursor-pointer transition-colors mt-1.5 active:scale-95"
+            className="directions-btn w-7 h-7 rounded-lg bg-emerald-50 hover:bg-emerald-100 border border-emerald-100 flex items-center justify-center text-emerald-700 cursor-pointer transition-colors mt-1.5 active:scale-95"
           >
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
               <polygon points="3 11 22 2 13 21 11 13 3 11" />
@@ -268,13 +281,5 @@ export default function VendorCard({
         </div>
       </div>
     </div>
-  );
-
-  return onClick ? (
-    cardContent
-  ) : (
-    <Link href={`/vendor/${id}`} className="block">
-      {cardContent}
-    </Link>
   );
 }

@@ -27,7 +27,7 @@ export default function BottomNav({ mode, activeTab, onTabChange }: BottomNavPro
   const tabs = isStudent ? studentTabs : vendorTabs;
 
   return (
-    <div className="absolute bottom-0 left-0 right-0 z-20 bg-white border-t border-[#ece5d8] pb-5 pt-2 px-3 flex justify-around shadow-[0_-6px_22px_-16px_rgba(30,40,20,0.4)]">
+    <div className="fixed lg:absolute bottom-0 left-0 right-0 z-50 bg-white border-t border-[#ece5d8] pb-5 pt-2 px-3 flex justify-around shadow-[0_-6px_22px_-16px_rgba(30,40,20,0.4)]">
       {tabs.map((tab) => {
         const isActive = activeTab === tab.id;
         const IconComponent = tab.Icon;
